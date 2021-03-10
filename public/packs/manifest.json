@@ -1,0 +1,18 @@
+{
+  "application.js": "/packs/js/application-b4d804698398ba0d4a95.js",
+  "application.js.map": "/packs/js/application-b4d804698398ba0d4a95.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-b4d804698398ba0d4a95.js"
+      ],
+      "js.map": [
+        "/packs/js/application-b4d804698398ba0d4a95.js.map"
+      ]
+    }
+  },
+  "media/fonts/materialdesignicons-webfont.eot?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-64d4cf64.eot",
+  "media/fonts/materialdesignicons-webfont.ttf?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-174c02fc.ttf",
+  "media/fonts/materialdesignicons-webfont.woff2?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-7a44ea19.woff2",
+  "media/fonts/materialdesignicons-webfont.woff?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-147e3378.woff"
+}
