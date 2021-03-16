@@ -21,7 +21,7 @@
 
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-    <v-app-bar-title>evenTown</v-app-bar-title>
+    <v-app-bar-title> <v-btn text @click="$router.push('/')">evenTown </v-btn></v-app-bar-title>
 
     <v-spacer></v-spacer>
 
@@ -37,17 +37,80 @@
     >
       Черноморск
     </v-btn>
+    <sign-in
+      v-if="!signedIn"
+      :show-dialog="signInDialog"
+      @sign-up="signUp"
+      @clear-sign-in="clearSignIn"
+    />
+    <sign-up
+      v-if="!signedIn"
+      :show-dialog="signUpDialog"
+      @sign-in="signIn"
+      @clear-sign-up="clearSignUp"
+    />
     <v-btn
+      v-else
       text
       height="48"
+      @click="signOutUser"
     >
       <v-icon>mdi-account</v-icon>
-      Войти
+      Выйти ({{signedIn.email}})
     </v-btn>
   </v-app-bar>
 </template>
-<script>
-export default {
 
+<script>
+import { mapActions, mapState, mapGetters } from "vuex"
+import SignIn from "../pages/users/sign_in"
+import SignUp from "../pages/users/register"
+
+export default {
+  components: {
+    "sign-in": SignIn,
+    "sign-up": SignUp
+  },
+
+  data: function() {
+    return {
+      signInDialog: null,
+      signUpDialog: null
+    }
+  },
+
+  computed: {
+    signedIn: function() {
+      return this.getUser
+    },
+
+    ...mapGetters("user", ["getUser"])
+  },
+
+  methods: {
+    signOutUser: function() {
+      this.signOut()
+    },
+
+    signIn: function() {
+      this.signInDialog = true
+      this.signUpDialog = false
+    },
+
+    signUp: function() {
+      this.signInDialog = false
+      this.signUpDialog = true
+    },
+
+    clearSignUp: function() {
+      this.signUpDialog = null
+    },
+
+    clearSignIn: function() {
+      this.signInDialog = null
+    },
+
+    ...mapActions("user", ["signOut"])
+  }
 }
 </script>

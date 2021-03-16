@@ -1,5 +1,5 @@
 <template>
-  <v-col class="margin-top-50">
+  <v-col>
     <filters />
     <v-row>
       <card />
@@ -21,9 +21,6 @@
 </script>
 
 <style lang="sass">
-.margin-top-50
-  margin-top: 50px
-
 .flex
   display: flex
   flex-direction: row

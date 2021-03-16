@@ -16,19 +16,22 @@
 // const imagePath = (name) => images(name, true)
 
 import Vue from 'vue'
+import Vuex from 'vuex'
 import vuetify from "../plugins/vuetify"
 
 //import '../assets/global.scss'
 
-//import store from '../libs/store'
+import store from '../store/index.js'
 import router from '../libs/router'
 import app from '../app.vue'
+import api from "../api"
+Vue.use(Vuex)
 
+Vue.prototype.$api = api
 
 document.addEventListener('DOMContentLoaded', () => {
-
   const application = new Vue({
-    //store,
+    store,
     router,
     vuetify,
     render: h => h(app),
