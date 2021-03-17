@@ -1,4 +1,5 @@
 class Api::ApiController < ApplicationController
+  respond_to :json
   after_action :add_csrf_to_response
 
   def add_csrf_to_response

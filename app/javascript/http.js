@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-
+import qs from "qs"
 //import store from '@store'
 //import router from './router'
 
@@ -15,6 +15,14 @@ var http = axios.create({
 //http.defaults.headers.post['Accept'] = 'application/json';
 
 http.interceptors.request.use(function(request) {
+  request.paramsSerializer = params => {
+    // Qs is already included in the Axios package
+    return qs.stringify(params, {
+      arrayFormat: "brackets",
+      encode: true
+    })
+  }
+
   if (request.method != 'get') {
     let csrfToken = sessionStorage.csrf
 

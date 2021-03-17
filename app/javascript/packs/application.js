@@ -25,8 +25,10 @@ import store from '../store/index.js'
 import router from '../libs/router'
 import app from '../app.vue'
 import api from "../api"
+import moment from 'moment'
 Vue.use(Vuex)
 
+Vue.prototype.$moment = moment;
 Vue.prototype.$api = api
 
 document.addEventListener('DOMContentLoaded', () => {

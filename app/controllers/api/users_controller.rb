@@ -19,6 +19,7 @@ class Api::UsersController < Api::ApiController
   end
 
   def destroy
+    current_user.destroy
   end
 
   private

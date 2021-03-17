@@ -23,10 +23,13 @@
 </template>
 <script>
   import Header from "components/header"
+  import { mapActions, mapState, mapGetters } from "vuex"
+
   export default {
     components: {
       "main-header": Header
-    }
+    },
+
   }
 </script>
 <style lang="sass">

@@ -1,5 +1,6 @@
 const { environment } = require('@rails/webpacker')
 const { VueLoaderPlugin } = require('vue-loader')
+const webpack = require('webpack')
 const vue = require('./loaders/vue')
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const lodash = require('lodash')
@@ -26,7 +27,15 @@ environment.loaders.delete('sass')
 environment.loaders.append('sass', sassLoader)
 environment.loaders.append('scss', scssLoader)
 
+environment.plugins.append(
+  'ProvidePlugin',
+  new webpack.ProvidePlugin({
+    moment: 'moment'
+  }),
+)
 environment.plugins.prepend('VuetifyLoader', new VuetifyLoaderPlugin())
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.prepend('vue', vue)
+
+
 module.exports = environment

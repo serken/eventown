@@ -19,13 +19,13 @@
         filter
         outlined
       >
-        Выставки
+        Мастер класс
       </v-chip>
       <v-chip
         filter
         outlined
       >
-        Мастер класс
+        Выставки
       </v-chip>
       <v-chip
         filter
@@ -53,6 +53,11 @@ export default {
   data: function() {
     return {
       filters: []
+    }
+  },
+  watch: {
+    filters: function() {
+      this.$emit('update-filters', this.filters)
     }
   }
 }

@@ -19,5 +19,11 @@ export default {
     return http.delete('/sign_out').then(({ data }) => {
       return data
     })
+  },
+
+  fetchEvents(params = {}) {
+    return http.get('/events', params).then(({ data }) => {
+      return data
+    })
   }
 }
