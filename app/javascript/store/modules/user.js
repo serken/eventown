@@ -9,7 +9,7 @@ export default {
   },
 
   getters: {
-    getUser: (state) => state.user,
+    currentUser: (state) => state.user,
     getLogin: (state) => state.user["login"]
   },
 

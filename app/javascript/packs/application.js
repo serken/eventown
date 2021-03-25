@@ -26,10 +26,13 @@ import router from '../libs/router'
 import app from '../app.vue'
 import api from "../api"
 import moment from 'moment'
+export const EventBus = new Vue()
+
 Vue.use(Vuex)
 
 Vue.prototype.$moment = moment;
 Vue.prototype.$api = api
+Vue.prototype.$eventBus = EventBus
 
 document.addEventListener('DOMContentLoaded', () => {
   const application = new Vue({

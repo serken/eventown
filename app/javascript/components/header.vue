@@ -1,5 +1,6 @@
 <template>
   <v-app-bar
+    app
     absolute
     color="#6A76AB"
     dark
@@ -19,7 +20,7 @@
       ></v-img>
     </template>
 
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="toggleLeft"></v-app-bar-nav-icon>
 
     <v-app-bar-title> <v-btn text @click="$router.push('/')">evenTown </v-btn></v-app-bar-title>
 
@@ -53,10 +54,10 @@
       v-else
       text
       height="48"
-      @click="signOutUser"
+      @click="toggleRight"
     >
       <v-icon>mdi-account</v-icon>
-      Выйти ({{signedIn.email}})
+      Профиль
     </v-btn>
   </v-app-bar>
 </template>
@@ -79,12 +80,16 @@ export default {
     }
   },
 
+  mounted: function() {
+    this.$eventBus.$on('sign-out', this.signOut)
+  },
+
   computed: {
     signedIn: function() {
-      return this.getUser
+      return this.currentUser
     },
 
-    ...mapGetters("user", ["getUser"])
+    ...mapGetters("user", ["currentUser"])
   },
 
   methods: {
@@ -108,6 +113,14 @@ export default {
 
     clearSignIn: function() {
       this.signInDialog = null
+    },
+
+    toggleLeft: function() {
+      this.$eventBus.$emit('toggle-left')
+    },
+
+    toggleRight: function() {
+      this.$eventBus.$emit('toggle-right')
     },
 
     ...mapActions("user", ["signOut"])

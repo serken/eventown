@@ -106,7 +106,7 @@
           :disabled="!valid"
           color="success"
           class="mr-4"
-          @click="$emit('clear-sign-up');reg"
+          @click="reg"
         >
           Зарегистрироваться
         </v-btn>
@@ -152,6 +152,7 @@ export default {
 
   methods: {
     reg: function() {
+      this.$emit('clear-sign-up')
       const params = {
         email: this.email,
         password: this.password,

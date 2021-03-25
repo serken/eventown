@@ -62,7 +62,7 @@
           :disabled="!valid"
           color="success"
           class="mr-4"
-          @click="$emit('clear-sign-up');signIn"
+          @click="signIn"
         >
           Войти
         </v-btn>
@@ -100,12 +100,9 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState(["getUser"]),
-  },
-
   methods: {
     signIn: function() {
+      this.$emit('clear-sign-up')
       const params = {
         email: this.email,
         password: this.password
