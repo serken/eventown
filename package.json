@@ -23,6 +23,7 @@
     "material-design-icons-iconfont": "^6.1.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
+    "qs": "^6.10.1",
     "sass": "^1.22",
     "sass-loader": "^7.1.0",
     "sass-variable-loader": "^0.1.2",
