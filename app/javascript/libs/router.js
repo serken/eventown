@@ -6,6 +6,8 @@ import NewEvent from '../pages/events/new_event'
 import SignIn from '../pages/users/sign_in'
 import Register from '../pages/users/register'
 
+import AdminUsersList from '../pages/admin/users/list'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -27,6 +29,15 @@ const router = new Router({
       path: '/sign_up',
       component: Register
     },
+    {
+      path: '/admin',
+      children: [
+        {
+          path: '/users',
+          component: AdminUsersList
+        }
+      ]
+    }
   ],
 })
 
