@@ -23,6 +23,5 @@ test:
   database: eventown_test
 
 production:
-  <<: *default
-  database: eventown_prod
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
