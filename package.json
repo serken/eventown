@@ -1,5 +1,5 @@
 {
-  "name": "oiv-qmi",
+  "name": "eventown",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.5.5",
@@ -50,8 +50,8 @@
     "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
-    "dev": "bin/webpack-dev-server",
-    "start": "bin/webpack --mode production",
+    "dev": "webpack-dev-server",
+    "start": "webpack --mode production",
     "build": "webpack --mode production"
-  },
+  }
 }
