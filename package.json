@@ -48,5 +48,10 @@
     "eslint-plugin-vuetify": "^1.0.0-beta.3",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
-  }
+  },
+  "scripts": {
+    "dev": "bin/webpack-dev-server",
+    "start": "bin/webpack --mode production",
+    "build": "webpack --mode production"
+  },
 }
