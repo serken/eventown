@@ -13,7 +13,7 @@
 
     <v-img
       height="250"
-      :src="`${event.image}?${number}`"
+      :src="`${event.pic}?${number}`"
     ></v-img>
     <v-card-text>
       {{event.type}}

@@ -38,6 +38,9 @@ class Api::EventsController < Api::ApiController
   private
 
   def event_params
-    params.permit!
+    params.permit(
+      :title, :description, :event_type, :image, :cost,
+      :remote_url, :start_date, :location, :phone_number
+    )
   end
 end

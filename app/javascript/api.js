@@ -31,5 +31,11 @@ export default {
     return http.get('/users', params).then(({ data }) => {
       return data
     })
+  },
+
+  createEvent(params = {}) {
+     return http.post('/events', params).then(({ data }) => {
+      return data
+    })
   }
 }

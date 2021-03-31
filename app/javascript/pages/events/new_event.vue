@@ -80,7 +80,6 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          :disabled="!valid"
           color="success"
           class="mr-4"
           @click="createEvent"
@@ -94,19 +93,58 @@
 <script>
 
 export default {
+
+  data: function() {
+    return {
+      title: '',
+      description: '',
+      event_type: '',
+      image: '',
+      cost: '',
+      remote_url: '',
+      start_date: '',
+      location: '',
+      phone_number: ''
+    }
+  },
+
   computed: {
     eventTypes: function() {
       return [
-        { text: "Вечеринка", value: 0},
-        { text: "Мастер Класс", value: 1},
-        { text: "Выставка", value: 2},
-        { text: "Открытие", value: 3}
+        { text: "Вечеринка", value: 'party'},
+        { text: "Мастер Класс", value: 'master_class'},
+        { text: "Выставка", value: 'performance'},
+        { text: "Открытие", value: 'opening'}
       ]
     }
   },
+
   methods: {
     createEvent: function() {
+      const params = {
+        title: this.title,
+        description: this.description,
+        event_type: this.event_type,
+        image: this.image,
+        cost: this.cost,
+        remote_url: this.remote_url,
+        start_date: this.start_date,
+        location: this.location,
+        phone_number: this.phone_number
+      }
 
+      let formData = new FormData()
+
+      Object.entries(params).forEach(
+        ([key, value]) => formData.append(key, value)
+      )
+
+      this.$api.createEvent(formData).then((response) => {
+        debugger
+        if (response.status == 200) {
+          this.$router.push('/')
+        }
+      })
     }
   }
 }
