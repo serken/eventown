@@ -28,7 +28,7 @@ export default {
   },
 
   fetchUsers(params = {}) {
-    return http.get('/events', params).then(({ data }) => {
+    return http.get('/users', params).then(({ data }) => {
       return data
     })
   }

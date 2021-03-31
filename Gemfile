@@ -21,6 +21,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'active_model_serializers'
 gem 'will_paginate'
 gem 'responders'
+
+gem 'cloudinary'
+gem 'carrierwave'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 

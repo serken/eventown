@@ -1,6 +1,11 @@
 class Api::UsersController < Api::ApiController
 
   def index
+    users = User.paginate(page: params[:page], per_page: params[:per_page])
+    if params[:search].present?
+      users = users.search(params[:search])
+    end
+    render json: users, meta: { total: users.count }, adapter: :json
   end
 
   def show

@@ -12,4 +12,6 @@ class Event < ApplicationRecord
     'performance' => 'Выставка',
     'opening' => 'Открытие'
   }
+
+  mount_uploader :image, ImageUploader
 end
