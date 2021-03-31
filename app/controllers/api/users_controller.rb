@@ -1,5 +1,5 @@
 class Api::UsersController < Api::ApiController
-  before_action :is_admin, only: [:destroy, :update]
+  #before_action :is_admin, only: [:destroy, :update, :index]
 
   def index
     users = User.paginate(page: params[:page], per_page: params[:per_page])

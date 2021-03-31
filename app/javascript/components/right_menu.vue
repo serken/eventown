@@ -12,6 +12,14 @@
     <v-btn
       text
       height="48"
+      @click="toAdmin"
+    >
+      Admin
+    </v-btn>
+
+    <v-btn
+      text
+      height="48"
       @click="signOut"
     >
       Выйти
@@ -34,6 +42,10 @@ export default {
     signOut: function() {
       this.close()
       this.$eventBus.$emit('sign-out')
+    },
+
+    toAdmin: function() {
+      this.$router.push({path: '/admin/users'})
     }
   }
 }
