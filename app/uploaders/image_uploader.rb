@@ -1,5 +1,4 @@
 class ImageUploader < CarrierWave::Uploader::Base
-
   include Cloudinary::CarrierWave
 
   process :convert => 'png'
@@ -12,5 +11,4 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :thumbnail do
     resize_to_fit(50, 50)
   end
-
 end

@@ -15,6 +15,24 @@ export default {
     })
   },
 
+  updateUser(id, params) {
+    return http.patch(`/users/${id}`, params).then(({ data }) => {
+      return data
+    })
+  },
+
+  deleteUser(id) {
+    return http.delete(`/users/${id}`).then(({ data }) => {
+      return data
+    })
+  },
+
+  createUser(params) {
+    return http.post('/users', params).then(({ data }) => {
+      return data
+    })
+  },
+
   signOut() {
     return http.delete('/sign_out').then(({ data }) => {
       return data

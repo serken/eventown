@@ -1,4 +1,5 @@
 class Api::UsersController < Api::ApiController
+  before_action :is_admin, only: [:destroy, :update]
 
   def index
     users = User.paginate(page: params[:page], per_page: params[:per_page])
@@ -12,6 +13,14 @@ class Api::UsersController < Api::ApiController
   end
 
   def update
+    user = User.find(params[:id])
+    user.assign_attributes(user_params)
+
+    if user.save
+      render json: user
+    else
+      render json: { error: 'error' }, status: 422
+    end
   end
 
   def create
@@ -24,7 +33,7 @@ class Api::UsersController < Api::ApiController
   end
 
   def destroy
-    current_user.destroy
+    User.find(params[:id]).destroy
   end
 
   private
