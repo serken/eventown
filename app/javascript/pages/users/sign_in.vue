@@ -89,7 +89,7 @@ export default {
       valid: true,
       dialog: false,
       emailRules: [
-        v => !!v || 'обязательно для ввода поле',
+        v => !!v || 'Пожалуйста,заполните электронную почту.',
       ],
     }
   },
