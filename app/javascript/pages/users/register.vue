@@ -27,7 +27,7 @@
             <v-text-field
               v-model="email"
               :rules="emailRules"
-              label="Эл. почта"
+              label="Эл. почта1"
               required
             ></v-text-field>
           </v-row>
