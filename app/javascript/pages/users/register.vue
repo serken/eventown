@@ -27,7 +27,7 @@
             <v-text-field
               v-model="email"
               :rules="emailRules"
-              label="Эл. почта"
+              label="Введите свой email"
               required
             ></v-text-field>
           </v-row>
@@ -35,7 +35,7 @@
           <v-row>
             <v-text-field
               v-model="password"
-              label="Пароль"
+              label="Введите пароль"
               type="password"
               required
             ></v-text-field>
@@ -54,7 +54,7 @@
 
             <v-text-field
               v-model="first_name"
-              label="Имя"
+              label="Введите свое имя"
             ></v-text-field>
 
           </v-row>
@@ -62,7 +62,7 @@
           <v-row>
             <v-text-field
               v-model="last_name"
-              label="Фамилия"
+              label="Введите свою фамилию"
             ></v-text-field>
 
           </v-row>
@@ -78,7 +78,7 @@
             <v-text-field
               v-if="is_org"
               v-model="org_name"
-              label="Название организации"
+              label="Введите название организации"
             ></v-text-field>
 
           <v-row>
@@ -139,7 +139,7 @@ export default {
       dialog: false,
       emailRules: [
         v => !!v || 'обязательно для ввода поле',
-        v => /.+@.+\..+/.test(v) || 'Неправильная почта',
+        v => /.+@.+\..+/.test(v) || 'Пожалуйста,проверьте,правильно ли указан адрес электронной почты.',
       ],
     }
   },
