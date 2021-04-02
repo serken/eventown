@@ -1,4 +1,4 @@
-class Api::UsersController < Api::ApiController
+class Api::Admin::UsersController < Api::ApiController
   def index
     users = User.paginate(page: params[:page], per_page: params[:per_page])
     if params[:search].present?
@@ -12,10 +12,11 @@ class Api::UsersController < Api::ApiController
   end
 
   def update
-    current_user.assign_attributes(user_params)
+    user = User.find(params[:id])
+    user.assign_attributes(user_params)
 
-    if current_user.save
-      render json: current_user
+    if user.save
+      render json: user
     else
       render json: { error: 'error' }, status: 422
     end
@@ -31,15 +32,12 @@ class Api::UsersController < Api::ApiController
   end
 
   def destroy
-    if current_user
-      current_user.destroy
-      session[:user_id] = nil
-    end
+    User.find(params[:id]).destroy
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :login, :first_name, :last_name, :is_org, :org_name)
+    params.require(:user).permit(:email, :password, :login, :first_name, :last_name, :is_org, :org_name, :is_admin)
   end
 end

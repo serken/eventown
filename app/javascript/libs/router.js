@@ -7,6 +7,7 @@ import SignIn from '../pages/users/sign_in'
 import Register from '../pages/users/register'
 
 import AdminUsersList from '../pages/admin/users/list'
+import AdminEventsList from '../pages/admin/events/list'
 import Admin from '../pages/admin/index'
 
 Vue.use(Router)
@@ -37,6 +38,10 @@ const router = new Router({
         {
           path: '/admin/users',
           component: AdminUsersList
+        },
+        {
+          path: '/admin/events',
+          component: AdminEventsList
         }
       ]
     }

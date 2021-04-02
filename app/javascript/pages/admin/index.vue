@@ -1,6 +1,9 @@
 <template>
   <div>
-    Admin panel
+    <v-tabs>
+      <v-tab to="/admin/users">Users</v-tab>
+      <v-tab to="/admin/events">Events</v-tab>
+    </v-tabs>
     <router-view />
   </div>
 </template>

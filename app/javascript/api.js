@@ -27,12 +27,6 @@ export default {
     })
   },
 
-  createUser(params) {
-    return http.post('/users', params).then(({ data }) => {
-      return data
-    })
-  },
-
   signOut() {
     return http.delete('/sign_out').then(({ data }) => {
       return data

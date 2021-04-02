@@ -25,6 +25,7 @@ import store from '../store/index.js'
 import router from '../libs/router'
 import app from '../app.vue'
 import api from "../api"
+import adminApi from "../adminApi"
 import moment from 'moment'
 export const EventBus = new Vue()
 
@@ -32,6 +33,7 @@ Vue.use(Vuex)
 
 Vue.prototype.$moment = moment;
 Vue.prototype.$api = api
+Vue.prototype.$adminApi = adminApi
 Vue.prototype.$eventBus = EventBus
 
 document.addEventListener('DOMContentLoaded', () => {

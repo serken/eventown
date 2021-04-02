@@ -13,7 +13,7 @@
 
       <v-data-table
         :headers="headers"
-        :items="users"
+        :items="events"
         :search="search"
         class="elevation-1"
       >
@@ -21,7 +21,7 @@
           <v-toolbar
             flat
           >
-            <v-toolbar-title>Users</v-toolbar-title>
+            <v-toolbar-title>Events</v-toolbar-title>
             <v-divider
               class="mx-4"
               inset
@@ -40,7 +40,7 @@
                   v-bind="attrs"
                   v-on="on"
                 >
-                  New User
+                  New Event
                 </v-btn>
               </template>
               <v-card>
@@ -52,49 +52,62 @@
                   <v-container>
                     <v-row>
                       <v-text-field
-                        v-model="editedItem.email"
-                        label="Эл. почта"
+                        v-model="title"
+                        label="Заголовок"
                         required
                       ></v-text-field>
                     </v-row>
 
                     <v-row>
-                      <v-text-field
-                        v-model="editedItem.password"
-                        label="Пароль"
-                        type="password"
+                      <v-textarea
+                        v-model="description"
+                        label="Описание"
                         required
-                      ></v-text-field>
+                        clearable
+                      ></v-textarea>
                     </v-row>
 
                     <v-row>
+                      <v-select
+                        v-model="event_type"
+                        label="Тип события"
+                        :items="eventTypes"
+                        required
+                      ></v-select>
+                    </v-row>
 
+                    <v-row>
                       <v-text-field
-                        v-model="editedItem.first_name"
-                        label="Имя"
+                        v-model="cost"
+                        label="Стоимость"
                       ></v-text-field>
-
-                    </v-row>
-
-                    <v-row>
-                      <v-text-field
-                        v-model="editedItem.last_name"
-                        label="Фамилия"
-                      ></v-text-field>
-
-                    </v-row>
-
-                    <v-row>
-                      <v-checkbox
-                        v-model="editedItem.is_org"
-                        label="Организация?"
-                      ></v-checkbox>
 
                     </v-row>
                     <v-row>
                       <v-text-field
-                        v-model="editedItem.org_name"
-                        label="Название организации"
+                        v-model="remote_url"
+                        label="Ссылка на организацию"
+                      ></v-text-field>
+                    </v-row>
+
+                    <v-row>
+                      <v-text-field
+                        v-model="start_date"
+                        label="Дата и время начала"
+                      ></v-text-field>
+                    </v-row>
+
+                    <v-row>
+                      <v-text-field
+                        v-model="location"
+                        label="Локация"
+                      ></v-text-field>
+                    </v-row>
+
+                    <v-row>
+                      <v-text-field
+                        v-model="phone_number"
+                        label="Телефон"
                       ></v-text-field>
                     </v-row>
                   </v-container>
@@ -164,7 +177,7 @@
 export default {
   data: function() {
     return {
-      users: [],
+      events: [],
       search: '',
       dialog: false,
       dialogDelete: false,
@@ -174,13 +187,14 @@ export default {
           align: 'start',
           value: 'id',
         },
-        { text: 'Email', value: 'email' },
-        { text: 'First Name', value: 'first_name' },
-        { text: 'Last Name', value: 'last_name' },
-        { text: 'Organization', value: 'org_name' },
-        { text: 'Is Org', value: 'is_org' },
-        { text: 'Is Admin', value: 'is_admin' },
-        { text: 'Password', value: 'password' },
+        { text: 'Title', value: 'title' },
+        { text: 'Description', value: 'description' },
+        { text: 'Start Date', value: 'start_date' },
+        { text: 'pic', value: 'pic' },
+        { text: 'Cost', value: 'cost' },
+        { text: 'Remote Url', value: 'remote_url' },
+        { text: 'location', value: 'location' },
+        { text: 'Phone', value: 'phone_number' },
         { text: 'Created', value: 'created_at' },
         { text: 'Updated', value: 'updated_at' },
         { text: 'Actions', value: 'actions', sortable: false },
@@ -195,6 +209,15 @@ export default {
     formTitle: function() {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
+
+    eventTypes: function() {
+      return [
+        { text: "Вечеринка", value: 'party'},
+        { text: "Мастер Класс", value: 'master_class'},
+        { text: "Выставка", value: 'performance'},
+        { text: "Открытие", value: 'opening'}
+      ]
+    }
   },
 
   watch: {
@@ -212,25 +235,25 @@ export default {
 
   methods: {
     fetchData: function() {
-      this.$adminApi.fetchUsers().then((data) => {
-        this.users = data.users
+      this.$adminApi.fetchEvents().then((data) => {
+        this.events = data.events
       })
     },
 
     editItem: function(item) {
-      this.editedIndex = this.users.indexOf(item)
+      this.editedIndex = this.events.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem: function(item) {
-      this.editedIndex = this.users.indexOf(item)
+      this.editedIndex = this.events.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
 
     deleteItemConfirm: function() {
-      this.$adminApi.deleteUser(this.editedItem.id).then((data) => {
+      this.$adminApi.deleteEvent(this.editedItem.id).then((data) => {
         this.fetchData()
       })
       this.closeDelete()
@@ -254,11 +277,11 @@ export default {
 
     save: function() {
       if (this.editedIndex > -1) {
-        this.$adminApi.updateUser(this.editedItem.id, this.editedItem).then((data) => {
+        this.$adminApi.updateEvent(this.editedItem.id, this.editedItem).then((data) => {
           this.fetchData()
         })
       } else {
-        this.$adminApi.createUser(this.editedItem).then((data) => {
+        this.$adminApi.createEvent(this.editedItem).then((data) => {
           this.fetchData()
         })
       }

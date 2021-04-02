@@ -5,6 +5,11 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'session#sign_out'
     resources :events
     resources :users
+
+    namespace :admin do
+      resources :events
+      resources :users
+    end
   end
 
   root to: 'landing#index'

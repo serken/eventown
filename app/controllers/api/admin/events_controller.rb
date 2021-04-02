@@ -1,9 +1,8 @@
-class Api::EventsController < Api::ApiController
-
+class Api::Admin::EventsController < Api::Admin::ApiController
   def index
     events = Event.paginate(page: params[:page], per_page: params[:per_page])
-    if params[:filters].present?
-      events = events.where(event_type: params[:filters])
+    if params[:search].present?
+      events = events.search(params[:search])
     end
     render json: events, meta: { total: events.count }, adapter: :json
   end
@@ -13,7 +12,7 @@ class Api::EventsController < Api::ApiController
   end
 
   def update
-    event = current_user.events.find(params[:id])
+    event = Event.find(params[:id])
     event.assign_attributes(event_params)
     if event.save
       render json: event
@@ -23,7 +22,7 @@ class Api::EventsController < Api::ApiController
   end
 
   def create
-    event = current_user.events.new(event_params)
+    event = Event.new(event_params)
     if event.save
       render json: event
     else
@@ -32,7 +31,7 @@ class Api::EventsController < Api::ApiController
   end
 
   def destroy
-    current_user.events.find(params[:id]).destroy
+    Event.find(params[:id]).destroy
   end
 
   private

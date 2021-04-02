@@ -13,5 +13,7 @@ class Event < ApplicationRecord
     'opening' => 'Открытие'
   }
 
+  belongs_to :user
+
   mount_uploader :image, ImageUploader
 end
