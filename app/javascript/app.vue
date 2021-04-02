@@ -1,11 +1,5 @@
 <template>
   <v-app>
-    <v-navigation-drawer app v-show="showLeftPanel">
-      <left-menu />
-    </v-navigation-drawer>
-    <v-navigation-drawer app right v-show="showRightPanel">
-      <right-menu />
-    </v-navigation-drawer>
     <main-header />
 
     <!-- Sizes your content based upon application components -->

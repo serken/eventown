@@ -52,7 +52,7 @@
                   <v-container>
                     <v-row>
                       <v-text-field
-                        v-model="title"
+                        v-model="editedItem.title"
                         label="Заголовок"
                         required
                       ></v-text-field>
@@ -60,7 +60,7 @@
 
                     <v-row>
                       <v-textarea
-                        v-model="description"
+                        v-model="editedItem.description"
                         label="Описание"
                         required
                         clearable
@@ -69,7 +69,7 @@
 
                     <v-row>
                       <v-select
-                        v-model="event_type"
+                        v-model="editedItem.event_type"
                         label="Тип события"
                         :items="eventTypes"
                         required
@@ -78,35 +78,35 @@
 
                     <v-row>
                       <v-text-field
-                        v-model="cost"
+                        v-model="editedItem.cost"
                         label="Стоимость"
                       ></v-text-field>
 
                     </v-row>
                     <v-row>
                       <v-text-field
-                        v-model="remote_url"
+                        v-model="editedItem.remote_url"
                         label="Ссылка на организацию"
                       ></v-text-field>
                     </v-row>
 
                     <v-row>
                       <v-text-field
-                        v-model="start_date"
+                        v-model="editedItem.start_date"
                         label="Дата и время начала"
                       ></v-text-field>
                     </v-row>
 
                     <v-row>
                       <v-text-field
-                        v-model="location"
+                        v-model="editedItem.location"
                         label="Локация"
                       ></v-text-field>
                     </v-row>
 
                     <v-row>
                       <v-text-field
-                        v-model="phone_number"
+                        v-model="editedItem.phone_number"
                         label="Телефон"
                       ></v-text-field>
                     </v-row>
