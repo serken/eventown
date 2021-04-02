@@ -27,14 +27,14 @@
             <v-text-field
               v-model="email"
               :rules="emailRules"
-              label="Эл. почта"
+              label="Введите свой email"
               required
             ></v-text-field>
           </v-row>
           <v-row>
             <v-text-field
               v-model="password"
-              label="Пароль"
+              label="Введите пароль"
               type="password"
               required
             ></v-text-field>
