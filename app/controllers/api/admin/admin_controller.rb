@@ -1,2 +1,2 @@
-class Api::Admin::ApiController < Api::ApiController
+class Api::Admin::AdminController < Api::ApiController
 end

@@ -22,7 +22,7 @@ export default {
   },
 
   fetchEvents(params = {}) {
-    return http.get('/events', params).then(({ data }) => {
+    return http.get('/admin/events', params).then(({ data }) => {
       return data
     })
   },
@@ -40,13 +40,13 @@ export default {
   },
 
   updateEvent(id, params) {
-    return http.patch(`/admin/users/${id}`, params).then(({ data }) => {
+    return http.patch(`/admin/events/${id}`, params).then(({ data }) => {
       return data
     })
   },
 
   deleteEvent(id) {
-    return http.delete(`/admin/users/${id}`).then(({ data }) => {
+    return http.delete(`/admin/events/${id}`).then(({ data }) => {
       return data
     })
   },

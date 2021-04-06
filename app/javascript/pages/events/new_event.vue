@@ -140,7 +140,6 @@ export default {
       )
 
       this.$api.createEvent(formData).then((response) => {
-        debugger
         if (response.status == 200) {
           this.$router.push('/')
         }

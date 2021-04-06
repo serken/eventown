@@ -1,6 +1,6 @@
-class Api::Admin::EventsController < Api::Admin::ApiController
+class Api::Admin::EventsController < Api::Admin::AdminController
   def index
-    events = Event.paginate(page: params[:page], per_page: params[:per_page])
+    events = Event.order(created_at: :desc)
     if params[:search].present?
       events = events.search(params[:search])
     end
@@ -13,6 +13,7 @@ class Api::Admin::EventsController < Api::Admin::ApiController
 
   def update
     event = Event.find(params[:id])
+
     event.assign_attributes(event_params)
     if event.save
       render json: event
@@ -39,7 +40,8 @@ class Api::Admin::EventsController < Api::Admin::ApiController
   def event_params
     params.permit(
       :title, :description, :event_type, :image, :cost,
-      :remote_url, :start_date, :location, :phone_number
+      :remote_url, :start_date, :location, :phone_number,
+      :active
     )
   end
 end

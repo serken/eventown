@@ -18,9 +18,17 @@
       </v-btn>
     </template>
     <v-card>
-      <v-card-title>
-        <span class="headline">Войти</span>
-      </v-card-title>
+      <v-app-bar>
+        <v-toolbar-title>
+          Авторизация
+        </v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn icon @click="dialog = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-app-bar>
       <v-card-text>
         <v-container>
           <v-row>
@@ -44,12 +52,6 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-          text
-          @click="dialog = false"
-        >
-          Закрыть
-        </v-btn>
         <v-btn
           text
           height="48"

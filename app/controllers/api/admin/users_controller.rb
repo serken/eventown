@@ -1,4 +1,4 @@
-class Api::Admin::UsersController < Api::ApiController
+class Api::Admin::UsersController < Api::Admin::AdminController
   def index
     users = User.paginate(page: params[:page], per_page: params[:per_page])
     if params[:search].present?

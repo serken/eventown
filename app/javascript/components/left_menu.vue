@@ -1,12 +1,11 @@
 <template>
   <div>
-    <v-btn
-      text
-      height="48"
-      @click="close"
-    >
-      закрыть
-    </v-btn>
+    <v-app-bar>
+      <v-spacer></v-spacer>
+      <v-btn icon @click="close">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </v-app-bar>
   </div>
 </template>
 <script>

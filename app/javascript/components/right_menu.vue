@@ -1,12 +1,10 @@
 <template>
   <div>
-    <v-btn
-      text
-      height="48"
-      @click="close"
-    >
-      закрыть
-    </v-btn>
+    <v-app-bar>
+      <v-btn icon @click="close">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </v-app-bar>
     <br />
     Приветствую, {{currentUser.firstName || currentUser.email}}
     <v-btn
@@ -15,6 +13,10 @@
       @click="toAdmin"
     >
       Admin
+    </v-btn>
+
+    <v-btn text @click="createEvent">
+      Добавить событие
     </v-btn>
 
     <v-btn
@@ -35,6 +37,10 @@ export default {
   },
 
   methods: {
+    createEvent: function() {
+      this.$router.push('/create_event')
+    },
+
     close: function() {
       this.$eventBus.$emit('toggle-right')
     },

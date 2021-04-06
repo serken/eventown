@@ -59,6 +59,13 @@
                     </v-row>
 
                     <v-row>
+                      <v-checkbox
+                        v-model="editedItem.active"
+                        label="Активен"
+                      ></v-checkbox>
+                    </v-row>
+
+                    <v-row>
                       <v-textarea
                         v-model="editedItem.description"
                         label="Описание"
@@ -188,6 +195,7 @@ export default {
           value: 'id',
         },
         { text: 'Title', value: 'title' },
+        { text: 'Active', value: 'active' },
         { text: 'Description', value: 'description' },
         { text: 'Start Date', value: 'start_date' },
         { text: 'pic', value: 'pic' },

@@ -48,9 +48,6 @@
         </v-chip>
       </v-chip-group>
     </v-card-text>
-    <v-btn text @click="createEvent">
-      Добавить событие
-    </v-btn>
   </div>
 </template>
 <script>
@@ -65,12 +62,6 @@ export default {
 
   computed: {
     ...mapGetters("user", ["currentUser"])
-  },
-
-  methods: {
-    createEvent: function() {
-      this.$router.push('/create_event')
-    }
   },
 
   watch: {

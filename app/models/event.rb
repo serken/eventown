@@ -15,5 +15,7 @@ class Event < ApplicationRecord
 
   belongs_to :user
 
+  scope :active, -> { where(active: true) }
+
   mount_uploader :image, ImageUploader
 end
