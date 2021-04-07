@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
     <br />
-    Приветствую, {{currentUser.firstName || currentUser.email}}
+    <span v-if="currentUser">Приветствую, {{currentUser.firstName || currentUser.email}}</span>
     <v-btn
       text
       height="48"

@@ -5,6 +5,7 @@
     <!-- Sizes your content based upon application components -->
     <v-main>
 
+      <FlashMessage :position="'top right'" />
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
 
@@ -41,6 +42,7 @@
     mounted: function() {
       this.$eventBus.$on('toggle-right', this.toggleRight)
       this.$eventBus.$on('toggle-left', this.toggleLeft)
+      this.$eventBus.$on('show-flash', this.showFlash)
     },
 
     methods: {
@@ -50,6 +52,17 @@
 
       toggleRight: function() {
         this.showRightPanel = !this.showRightPanel
+      },
+
+      showFlash: function(flash) {
+        this.flashMessage.show({
+          status: flash.type,
+          time: 5000,
+          clickable: false,
+          icon: "icon",
+          blockClass: `notifications`,
+          message: flash.text
+        })
       }
     }
 
@@ -58,4 +71,6 @@
 <style lang="sass">
   .v-main
     padding-top: 100px !important
+  .notifications
+    z-index: 9999
 </style>

@@ -1,7 +1,8 @@
 class Api::EventsController < Api::ApiController
 
   def index
-    events = Event.active.paginate(page: params[:page], per_page: params[:per_page])
+    events = current_user&.is_admin ? Event : Event.active
+    events = events.paginate(page: params[:page], per_page: params[:per_page])
     if params[:filters].present?
       events = events.where(event_type: params[:filters])
     end

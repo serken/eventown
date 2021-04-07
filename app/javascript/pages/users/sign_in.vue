@@ -112,7 +112,10 @@ export default {
       this.$api.signIn(params).then((user) => {
         this.setUser(user)
         this.dialog = false
+        this.$eventBus.$emit('show-flash', { type: 'info', text: 'Авторизация удалась. Welcome' })
         this.$router.push('/')
+      }).catch((error) => {
+        this.$eventBus.$emit('show-flash', { type: 'error', text: 'Неудалось авторизироваться' })
       })
     },
 

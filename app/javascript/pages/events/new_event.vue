@@ -140,9 +140,10 @@ export default {
       )
 
       this.$api.createEvent(formData).then((response) => {
-        if (response.status == 200) {
-          this.$router.push('/')
-        }
+        this.$eventBus.$emit('show-flash', { type: 'info', text: 'Событие создано' })
+        this.$router.push('/')
+      }).catch((error) => {
+        this.$eventBus.$emit('show-flash', { type: 'error', text: 'Возникла ошибка при создании события' })
       })
     }
   }

@@ -154,7 +154,6 @@ export default {
 
   methods: {
     reg: function() {
-      this.$emit('clear-sign-up')
       const params = {
         email: this.email,
         password: this.password,
@@ -164,8 +163,12 @@ export default {
         last_name: this.last_name
       }
       this.$api.register(params).then((data) => {
+        this.$emit('clear-sign-up')
         this.dialog = false
+        this.$eventBus.$emit('show-flash', { type: 'info', text: 'Регистрация прошла успешно. Благодарочка' })
         this.$emit('sign-in')
+      }).catch((error) => {
+        this.$eventBus.$emit('show-flash', { type: 'error', text: 'Регистрация не удалась' })
       })
     }
   }

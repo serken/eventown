@@ -108,7 +108,7 @@ export default {
 
 
   mounted: function() {
-    this.$eventBus.$on('sign-out', this.signOut)
+    this.$eventBus.$on('sign-out', this.signOutUser)
     this.$eventBus.$on('toggle-right', this.toggleRight)
     this.$eventBus.$on('toggle-left', this.toggleLeft)
   },
@@ -131,6 +131,7 @@ export default {
     },
 
     signOutUser: function() {
+      this.$eventBus.$emit('show-flash', { type: 'info', text: 'Пока пока' })
       this.signOut()
     },
 

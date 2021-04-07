@@ -18,6 +18,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import vuetify from "../plugins/vuetify"
+import FlashMessage from '@smartweb/vue-flash-message'
 
 //import '../assets/global.scss'
 
@@ -30,6 +31,7 @@ import moment from 'moment'
 export const EventBus = new Vue()
 
 Vue.use(Vuex)
+Vue.use(FlashMessage, { strategy: "multiple" })
 
 Vue.prototype.$moment = moment;
 Vue.prototype.$api = api
