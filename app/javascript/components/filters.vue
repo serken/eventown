@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-card-text>
+  <div class="filters">
+    <v-card-text class="filter">
       <h2 class="title mb-2">
         Быстрые фильтры
       </h2>
@@ -57,16 +57,18 @@
         :return-value.sync="date_filter"
         transition="scale-transition"
         offset-y
-        min-width="auto"
+        class="filter"
+        min-width="auto""
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="date_filter"
-            label="Время начала"
+            label="Поиск по Дате"
             prepend-icon="mdi-calendar"
             readonly
             v-bind="attrs"
             v-on="on"
+            class="filter-data"
           ></v-text-field>
         </template>
         <v-date-picker
@@ -123,3 +125,14 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .filters
+    display: flex
+    flex-direction: row
+    .filter
+      width: auto
+    .filter-data
+      width: 300px
+      flex: none
+</style>

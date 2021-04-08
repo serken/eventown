@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_110529) do
+ActiveRecord::Schema.define(version: 2021_04_08_142239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 2021_04_08_110529) do
     t.time "start_time"
     t.string "duration"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "favoritable_id"
+    t.string "favoritable_type"
+    t.integer "user_id"
+    t.index ["favoritable_id"], name: "index_favorites_on_favoritable_id"
+    t.index ["favoritable_type"], name: "index_favorites_on_favoritable_type"
   end
 
   create_table "users", force: :cascade do |t|

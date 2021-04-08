@@ -49,5 +49,11 @@ export default {
      return http.post('/events', params).then(({ data }) => {
       return data
     })
-  }
+  },
+
+  makeFavorite(id) {
+     return http.post(`/events/${id}/favorite`).then(({ data }) => {
+      return data
+    })
+   }
 }

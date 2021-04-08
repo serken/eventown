@@ -7,6 +7,9 @@ class Api::EventsController < Api::ApiController
       end_date = params[:date_filter][1] || start_date
       events = events.with_date_range(start_date, end_date)
     end
+    if params[:id].present?
+      events = events.where(id: params[:id])
+    end
     events = events.paginate(page: params[:page], per_page: params[:per_page])
     if params[:filters].present?
       events = events.where(event_type: params[:filters])
@@ -26,6 +29,18 @@ class Api::EventsController < Api::ApiController
     else
       render json: { errors: 'error' }, status: 422
     end
+  end
+
+  def favorite
+    event = Event.find(params[:id])
+    favoritable = current_user.favorites.find_by(favoritable: event)
+    if favoritable.present?
+      favoritable.destroy
+    else
+      current_user.favorites.create(favoritable: event)
+    end
+
+    render json: current_user
   end
 
   def create

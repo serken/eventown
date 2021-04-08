@@ -14,6 +14,7 @@ class Event < ApplicationRecord
   }
 
   belongs_to :user
+  has_many :favorites, inverse_of: :user
 
   scope :active, -> { where(active: true) }
 

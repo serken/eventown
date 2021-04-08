@@ -24,8 +24,15 @@
       >Неактивен
       </v-chip>
     </v-card-text>
-    <v-card-title>{{event.title}}</v-card-title>
+    <v-card-title>{{event.title}}
 
+      <v-icon
+        v-if="currentUser"
+        @click="makeFavorite"
+      >
+        {{ isFavorite ? 'mdi-star' : 'mdi-star-outline' }}
+      </v-icon>
+    </v-card-title>
     <v-card-text>
 
       <div class="my-4 subtitle-1">
@@ -62,6 +69,8 @@
   </v-card>
 </template>
 <script>
+  import { mapActions, mapState, mapGetters } from "vuex"
+
   export default {
     props: {
       event: {
@@ -77,9 +86,25 @@
 
     computed: {
       formatedDate: function() {
-        console.log(this.event.start_date)
         return this.$moment(this.event.start_date).format("D MMMM YYYY")
-      }
+      },
+
+      isFavorite: function() {
+        return this.currentUser.favorite_events.map(i => i.favoritable_id).includes(this.event.id)
+      },
+
+      ...mapGetters("user", ["currentUser"])
+    },
+
+    methods: {
+      makeFavorite: function() {
+        this.$api.makeFavorite(this.event.id).then((data) => {
+          this.setUser(data)
+        }).catch((error) => {
+
+        })
+      },
+      ...mapActions("user", ["setUser"])
     }
   }
 </script>
