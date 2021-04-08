@@ -59,7 +59,7 @@
           </v-row>
 
 
-          <row>
+          <v-row>
             <v-menu
               ref="date_menu"
               v-model="date_menu"
@@ -101,9 +101,9 @@
                 </v-btn>
               </v-date-picker>
             </v-menu>
-          </row>
+          </v-row>
 
-          <row>
+          <v-row>
             <v-menu
               ref="time_menu"
               v-model="time_menu"
@@ -146,7 +146,7 @@
                 </v-btn>
               </v-time-picker>
             </v-menu>
-          </row>
+          </v-row>
 
           <v-row>
             <v-text-field

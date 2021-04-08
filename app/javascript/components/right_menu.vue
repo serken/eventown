@@ -5,27 +5,30 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-app-bar>
-    <br />
-    <span v-if="currentUser">Приветствую, {{currentUser.firstName || currentUser.email}}</span>
-    <v-btn
-      text
-      height="48"
-      @click="toAdmin"
-    >
-      Admin
-    </v-btn>
 
-    <v-btn text @click="createEvent">
-      Добавить событие
-    </v-btn>
-
-    <v-btn
-      text
-      height="48"
-      @click="signOut"
-    >
-      Выйти
-    </v-btn>
+    <v-list>
+      <v-list-item v-if="currentUser">
+        <v-list-item-title>Приветствую, {{currentUser.firstName || currentUser.email}}</v-list-item-title>
+      </v-list-item>
+      <v-list-item v-if="currentUser" @click="toAdmin">
+        <v-list-item-title>В Админ панель</v-list-item-title>
+      </v-list-item>
+      <v-list-item v-if="currentUser" to="/profile/edit">
+        <v-list-item-title>Редактировать профиль</v-list-item-title>
+      </v-list-item>
+      <v-list-item v-if="currentUser" to="/profile/favorites">
+        <v-list-item-title>Избранные</v-list-item-title>
+      </v-list-item>
+      <v-list-item v-if="currentUser && currentUser.is_org" to="/profile/my_events">
+        <v-list-item-title>Мои События</v-list-item-title>
+      </v-list-item>
+      <v-list-item v-if="currentUser && currentUser.is_org" @click="createEvent">
+        <v-list-item-title>Добавить событие</v-list-item-title>
+      </v-list-item>
+      <v-list-item @click="signOut">
+        <v-list-item-title>Выйти</v-list-item-title>
+      </v-list-item>
+    </v-list>
   </div>
 </template>
 <script>
