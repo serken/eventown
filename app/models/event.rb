@@ -22,6 +22,6 @@ class Event < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   validates :cost, :duration, numericality: true
-  validates :event_type, :title, :description, :phone_number, presence: true
+  validates :event_type, :title, :description, :phone_number, :start_time, :start_date, presence: true
   validates :title, length: { in: 8..20 }
 end

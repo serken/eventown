@@ -28,6 +28,8 @@ import app from '../app.vue'
 import api from "../api"
 import adminApi from "../adminApi"
 import moment from 'moment'
+import 'moment/locale/fr'
+moment.locale('ru')
 export const EventBus = new Vue()
 
 Vue.use(Vuex)

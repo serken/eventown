@@ -13,10 +13,16 @@
 
     <v-img
       height="250"
-      :src="`${event.pic}?${number}`"
+      :src="`${event.pic}`"
     ></v-img>
     <v-card-text>
       {{event.type}}
+    </v-card-text>
+    <v-card-text v-if="!event.active">
+      <v-chip
+        class="ma-2"
+      >Неактивен
+      </v-chip>
     </v-card-text>
     <v-card-title>{{event.title}}</v-card-title>
 
@@ -38,11 +44,10 @@
 
     <v-card-text>
       <v-chip-group
-        active-class="deep-purple accent-4 white--text"
         column
       >
-        <v-chip>{{this.$moment(event.start_date)}}</v-chip>
-
+        <v-chip>{{formatedDate}}</v-chip>
+        <v-chip>{{event.start_time}}</v-chip>
       </v-chip-group>
     </v-card-text>
 
@@ -67,7 +72,13 @@
 
     data: function() {
       return {
-        number: Math.random()
+      }
+    },
+
+    computed: {
+      formatedDate: function() {
+        console.log(this.event.start_date)
+        return this.$moment(this.event.start_date).format("D MMMM YYYY")
       }
     }
   }
