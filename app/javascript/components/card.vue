@@ -2,6 +2,7 @@
   <v-card
     class="mx-auto my-12"
     max-width="374"
+    :to="`/events/${event.id}`"
   >
     <template slot="progress">
       <v-progress-linear
@@ -47,15 +48,12 @@
 
     <v-divider class="mx-4"></v-divider>
 
-    <v-card-title>Tonight's availability</v-card-title>
-
     <v-card-text>
-      <v-chip-group
-        column
-      >
-        <v-chip>{{formatedDate}}</v-chip>
-        <v-chip>{{event.start_time}}</v-chip>
-      </v-chip-group>
+      <span class="text-h5">
+        {{event.start_time}}
+      </span>
+      <br>
+      {{formatedDate}}
     </v-card-text>
 
     <v-card-actions>
@@ -86,7 +84,7 @@
 
     computed: {
       formatedDate: function() {
-        return this.$moment(this.event.start_date).format("D MMMM YYYY")
+        return this.$moment(this.event.start_date).format("dddd, D MMMM YYYY.")
       },
 
       isFavorite: function() {

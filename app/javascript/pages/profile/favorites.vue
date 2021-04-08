@@ -23,7 +23,7 @@
     <filters @update-filters="updateFilters" @update-date-filter="updateDateFilter" />
     <v-pagination v-model="page" :total-visible="7" :length="total" :per-page="perPage" @input="pageChanged" />
     <v-row>
-      <card v-for="event in getEvents" :event="event" :key="event.id"/>
+      <card v-for="event in events" :event="event" :key="event.id"/>
     </v-row>
     <v-pagination v-model="page" :total-visible="7" :length="total" :per-page="perPage" @input="pageChanged" />
   </v-col>
@@ -48,7 +48,8 @@
         total: null,
         dialog: false,
         filters: [],
-        date_filter: []
+        date_filter: [],
+        events: []
       }
     },
 
@@ -59,9 +60,10 @@
     methods: {
       fetchFiltereEvents: function() {
         this.dialog = true
-        this.$api.fetchEvents({ params: { page: this.page, per_page: this.perPage, filters: this.filters, date_filter: this.date_filter, id: this.favoriteIds }}).then((data) => {
+
+        this.$api.fetchEvents({ params: { page: this.page, per_page: this.perPage, filters: this.filters, date_filter: this.date_filter, id: this.favoriteIds, favorite: true }}).then((data) => {
           this.total = Math.ceil(data.meta.total / this.perPage)
-          this.setEvents(data.events)
+          this.events = data.events
           this.dialog = false
         })
       },
@@ -78,16 +80,13 @@
       updateDateFilter: function(dateFilter) {
         this.date_filter = dateFilter
         this.fetchFiltereEvents()
-      },
-
-      ...mapActions("events", ["setEvents"])
+      }
     },
 
     computed: {
       favoriteIds: function() {
         return this.currentUser.favorite_events.map(i => i.favoritable_id)
       },
-      ...mapGetters("events", ["getEvents"]),
       ...mapGetters("user", ["currentUser"])
     },
 

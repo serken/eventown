@@ -16,4 +16,10 @@ class EventSerializer < ApplicationSerializer
   attribute :start_time do
     object.start_time&.strftime('%H:%M')
   end
+
+  attribute :comments do
+    object.comments
+  end
+
+  has_many :comments
 end

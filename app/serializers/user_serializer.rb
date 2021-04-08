@@ -7,4 +7,6 @@ class UserSerializer < ApplicationSerializer
   attribute :favorite_events do
     object.favorite_events
   end
+
+  has_many :comments
 end

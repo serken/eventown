@@ -4,9 +4,18 @@ Rails.application.routes.draw do
     post 'sign_up', to: 'users#create'
     delete 'sign_out', to: 'session#sign_out'
     resources :events do
-      post 'favorite', on: :member
+      member do
+        post 'favorite'
+        post '/comments', to: 'events#add_comment'
+        delete '/comments/:comment_id', to: 'events#delete_comment'
+      end
     end
-    resources :users
+    resources :users do
+      member do
+        post '/comments', to: 'users#add_comment'
+        delete '/comments/:comment_id', to: 'users#delete_comment'
+      end
+    end
 
     namespace :admin do
       resources :events

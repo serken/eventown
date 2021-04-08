@@ -120,6 +120,8 @@
 </template>
 
 <script>
+import { mapActions, mapState, mapGetters } from "vuex"
+
 export default {
 
   props: {
@@ -169,12 +171,14 @@ export default {
         this.$emit('clear-sign-up')
         this.dialog = false
         this.$eventBus.$emit('show-flash', { type: 'info', text: 'Регистрация прошла успешно. Благодарочка' })
-        this.$emit('sign-in')
+        this.setUser(data)
       }).catch((error) => {
         this.errors = error.errors
         this.$eventBus.$emit('show-flash', { type: 'error', text: error.full_errors })
       })
-    }
+    },
+
+    ...mapActions("user", ["setUser"])
   }
 }
 </script>

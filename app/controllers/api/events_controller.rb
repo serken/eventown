@@ -7,7 +7,8 @@ class Api::EventsController < Api::ApiController
       end_date = params[:date_filter][1] || start_date
       events = events.with_date_range(start_date, end_date)
     end
-    if params[:id].present?
+
+    if params[:favorite]
       events = events.where(id: params[:id])
     end
     events = events.paginate(page: params[:page], per_page: params[:per_page])
@@ -54,6 +55,20 @@ class Api::EventsController < Api::ApiController
 
   def destroy
     current_user.events.find(params[:id]).destroy
+  end
+
+  def add_comment
+    event = Event.find(params[:id])
+    current_user.my_comments.create(commentable: event, message: params[:message])
+
+    render json: event
+  end
+
+  def delete_comment
+    event = Event.find(params[:id])
+    current_user.my_comments.find_by(commentable: event, id: params[:comment_id]).destroy
+
+    render json: event
   end
 
   private
