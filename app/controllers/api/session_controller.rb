@@ -5,7 +5,7 @@ class Api::SessionController < Api::ApiController
       session[:user_id] = user.id
       render json: user
     else
-      render json: { error: 'not authorized' }, status: 401
+      render json: { errors: 'Email or password is incorrect' }, status: 401
     end
   end
 

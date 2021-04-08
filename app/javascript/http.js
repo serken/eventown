@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import axios from 'axios'
 import qs from "qs"
-//import store from '@store'
-//import router from './router'
+import store from 'store'
+import router from './libs/router'
 
 var config = window.config
 
@@ -45,25 +45,13 @@ http.interceptors.response.use(function (response) {
     sessionStorage.csrf = error.response.config.headers['X-CSRF-Token']
   }
 
-  if (error.code === 'ECONNABORTED' || error.response.status == 500) {
-    error.response = {
-      data: {
-        errors: {
-          general: [
-            error.message
-          ]
-        }
-      }
-    }
-  } else if (error.response.status == 401) {
+  if (error.response.status == 401) {
     // TODO: use generic method for client session reset
-    sessionStorage.errorOnPreviousPage = error.response.data.errors.general[0]
     store.commit('setUser', null)
-    router.push('/')
   }
 
   // Do something with response error
-  return Promise.reject(error)
+  return Promise.reject(error.response.data)
 })
 
 sessionStorage.csrf = document.querySelector('meta[name=csrf-token]').content

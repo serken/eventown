@@ -35,6 +35,7 @@
             <v-text-field
               v-model="email"
               :rules="emailRules"
+              :error-messages="errors.email"
               label="Введите свой email"
               required
             ></v-text-field>
@@ -43,6 +44,7 @@
           <v-row>
             <v-text-field
               v-model="password"
+              :error-messages="errors.password"
               label="Введите пароль"
               type="password"
               required
@@ -139,6 +141,7 @@ export default {
       last_name: '',
       org_name: '',
       dialog: false,
+      errors: {},
       emailRules: [
         v => !!v || 'Пожалуйста, заполните электронную почту.',
         v => /.+@.+\..+/.test(v) || 'Пожалуйста, проверьте правильно ли указан адрес электронной почты.',
@@ -168,7 +171,8 @@ export default {
         this.$eventBus.$emit('show-flash', { type: 'info', text: 'Регистрация прошла успешно. Благодарочка' })
         this.$emit('sign-in')
       }).catch((error) => {
-        this.$eventBus.$emit('show-flash', { type: 'error', text: 'Регистрация не удалась' })
+        this.errors = error.errors
+        this.$eventBus.$emit('show-flash', { type: 'error', text: error.full_errors })
       })
     }
   }

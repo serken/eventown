@@ -8,6 +8,7 @@
           <v-row>
             <v-text-field
               v-model="title"
+              :error-messages="errors.title"
               label="Заголовок"
               required
             ></v-text-field>
@@ -16,6 +17,7 @@
           <v-row>
             <v-textarea
               v-model="description"
+              :error-messages="errors.description"
               label="Описание"
               required
               clearable
@@ -25,6 +27,7 @@
           <v-row>
             <v-select
               v-model="event_type"
+              :error-messages="errors.event_type"
               label="Тип события"
               :items="eventTypes"
               required
@@ -35,6 +38,7 @@
 
             <v-file-input
               v-model="image"
+              :error-messages="errors.image"
               label="Изображение"
             ></v-file-input>
 
@@ -43,6 +47,7 @@
           <v-row>
             <v-text-field
               v-model="cost"
+              :error-messages="errors.cost"
               label="Стоимость"
             ></v-text-field>
 
@@ -50,6 +55,7 @@
           <v-row>
             <v-text-field
               v-model="remote_url"
+              :error-messages="errors.remote_url"
               label="Ссылка на организацию"
             ></v-text-field>
           </v-row>
@@ -57,6 +63,7 @@
           <v-row>
             <v-text-field
               v-model="start_date"
+              :error-messages="errors.start_date"
               label="Дата и время начала"
             ></v-text-field>
           </v-row>
@@ -64,6 +71,7 @@
           <v-row>
             <v-text-field
               v-model="location"
+              :error-messages="errors.location"
               label="Локация"
             ></v-text-field>
           </v-row>
@@ -71,6 +79,7 @@
           <v-row>
             <v-text-field
               v-model="phone_number"
+              :error-messages="errors.phone_number"
               label="Телефон"
             ></v-text-field>
           </v-row>
@@ -104,7 +113,8 @@ export default {
       remote_url: '',
       start_date: '',
       location: '',
-      phone_number: ''
+      phone_number: '',
+      errors: {}
     }
   },
 
@@ -143,7 +153,8 @@ export default {
         this.$eventBus.$emit('show-flash', { type: 'info', text: 'Событие создано' })
         this.$router.push('/')
       }).catch((error) => {
-        this.$eventBus.$emit('show-flash', { type: 'error', text: 'Возникла ошибка при создании события' })
+        this.errors = error.errors
+        this.$eventBus.$emit('show-flash', { type: 'error', text: error.full_errors })
       })
     }
   }

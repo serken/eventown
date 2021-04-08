@@ -19,7 +19,7 @@ class Api::EventsController < Api::ApiController
     if event.save
       render json: event
     else
-      render json: { error: 'error' }, status: 422
+      render json: { errors: 'error' }, status: 422
     end
   end
 
@@ -28,7 +28,7 @@ class Api::EventsController < Api::ApiController
     if event.save
       render json: event
     else
-      render json: { error: 'error' }, status: 422
+      render json: { errors: event.errors.messages, full_errors: event.errors.full_messages }, status: 422
     end
   end
 

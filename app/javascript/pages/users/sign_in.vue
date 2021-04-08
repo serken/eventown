@@ -115,7 +115,7 @@ export default {
         this.$eventBus.$emit('show-flash', { type: 'info', text: 'Авторизация удалась. Welcome' })
         this.$router.push('/')
       }).catch((error) => {
-        this.$eventBus.$emit('show-flash', { type: 'error', text: 'Неудалось авторизироваться' })
+        this.$eventBus.$emit('show-flash', { type: 'error', text: error.errors })
       })
     },
 

@@ -18,4 +18,8 @@ class Event < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   mount_uploader :image, ImageUploader
+
+  validates :cost, numericality: true
+  validates :event_type, :title, :description, :phone_number, presence: true
+  validates :title, length: { in: 8..20 }
 end

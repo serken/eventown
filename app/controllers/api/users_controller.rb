@@ -17,7 +17,7 @@ class Api::UsersController < Api::ApiController
     if current_user.save
       render json: current_user
     else
-      render json: { error: 'error' }, status: 422
+      render json: { errors: 'error' }, status: 422
     end
   end
 
@@ -26,7 +26,7 @@ class Api::UsersController < Api::ApiController
     if user.save
       render json: user
     else
-      render json: { error: 'error' }, status: 422
+      render json: { errors: user.errors.messages, full_errors: user.errors.full_messages }, status: 422
     end
   end
 
