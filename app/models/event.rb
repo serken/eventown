@@ -17,9 +17,11 @@ class Event < ApplicationRecord
 
   scope :active, -> { where(active: true) }
 
+  scope :with_date_range, -> (start_date, end_date) { where(start_date: start_date..end_date) }
+
   mount_uploader :image, ImageUploader
 
-  validates :cost, numericality: true
+  validates :cost, :duration, numericality: true
   validates :event_type, :title, :description, :phone_number, presence: true
   validates :title, length: { in: 8..20 }
 end

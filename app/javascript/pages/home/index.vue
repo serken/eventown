@@ -20,7 +20,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <filters @update-filters="updateFilters" />
+    <filters @update-filters="updateFilters" @update-date-filter="updateDateFilter" />
     <v-pagination v-model="page" :total-visible="7" :length="total" :per-page="perPage" @input="pageChanged" />
     <v-row>
       <card v-for="event in getEvents" :event="event" :key="event.id"/>
@@ -47,7 +47,8 @@
         perPage: 6,
         total: null,
         dialog: false,
-        filters: []
+        filters: [],
+        date_filter: []
       }
     },
 
@@ -58,7 +59,7 @@
     methods: {
       fetchFiltereEvents: function() {
         this.dialog = true
-        this.$api.fetchEvents({ params: { page: this.page, per_page: this.perPage, filters: this.filters }}).then((data) => {
+        this.$api.fetchEvents({ params: { page: this.page, per_page: this.perPage, filters: this.filters, date_filter: this.date_filter }}).then((data) => {
           this.total = Math.ceil(data.meta.total / this.perPage)
           this.setEvents(data.events)
           this.dialog = false
@@ -71,6 +72,11 @@
 
       updateFilters: function(filters) {
         this.filters = filters
+        this.fetchFiltereEvents()
+      },
+
+      updateDateFilter: function(dateFilter) {
+        this.date_filter = dateFilter
         this.fetchFiltereEvents()
       },
 

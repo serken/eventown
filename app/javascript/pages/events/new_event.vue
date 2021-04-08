@@ -35,13 +35,11 @@
           </v-row>
 
           <v-row>
-
             <v-file-input
               v-model="image"
               :error-messages="errors.image"
               label="Изображение"
             ></v-file-input>
-
           </v-row>
 
           <v-row>
@@ -60,11 +58,101 @@
             ></v-text-field>
           </v-row>
 
+
+          <row>
+            <v-menu
+              ref="date_menu"
+              v-model="date_menu"
+              :close-on-content-click="false"
+              :return-value.sync="start_date"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="start_date"
+                  label="Дата начала"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="start_date"
+                no-title
+                scrollable
+              >
+                <v-spacer></v-spacer>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="date_menu = false"
+                >
+                  Cancel
+                </v-btn>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.date_menu.save(start_date)"
+                >
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
+          </row>
+
+          <row>
+            <v-menu
+              ref="time_menu"
+              v-model="time_menu"
+              :close-on-content-click="false"
+              :return-value.sync="start_time"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="start_time"
+                  label="Время начала"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-time-picker
+                v-model="start_time"
+                no-title
+                scrollable
+                format="24hr"
+              >
+                <v-spacer></v-spacer>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="time_menu = false"
+                >
+                  Cancel
+                </v-btn>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.time_menu.save(start_time)"
+                >
+                  OK
+                </v-btn>
+              </v-time-picker>
+            </v-menu>
+          </row>
+
           <v-row>
             <v-text-field
-              v-model="start_date"
-              :error-messages="errors.start_date"
-              label="Дата и время начала"
+              v-model="duration"
+              :error-messages="errors.duration"
+              label="Длительность"
             ></v-text-field>
           </v-row>
 
@@ -105,6 +193,8 @@ export default {
 
   data: function() {
     return {
+      date_menu: false,
+      time_menu: false,
       title: '',
       description: '',
       event_type: '',
@@ -112,8 +202,10 @@ export default {
       cost: '',
       remote_url: '',
       start_date: '',
+      start_time: '',
       location: '',
       phone_number: '',
+      duration: '',
       errors: {}
     }
   },
@@ -139,6 +231,8 @@ export default {
         cost: this.cost,
         remote_url: this.remote_url,
         start_date: this.start_date,
+        start_time: this.start_time,
+        duration: this.duration,
         location: this.location,
         phone_number: this.phone_number
       }
