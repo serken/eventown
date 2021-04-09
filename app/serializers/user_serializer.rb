@@ -9,4 +9,5 @@ class UserSerializer < ApplicationSerializer
   end
 
   has_many :comments
+  has_many :events
 end

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     post 'sign_in', to: 'session#sign_in'
     post 'sign_up', to: 'users#create'
     delete 'sign_out', to: 'session#sign_out'
+    get 'restore_session', to: 'session#restore'
+
     resources :events do
       member do
         post 'favorite'

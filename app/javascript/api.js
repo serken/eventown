@@ -45,6 +45,12 @@ export default {
     })
   },
 
+  fetchCurrentUser() {
+    return http.get('/restore_session').then(({ data }) => {
+      return data
+    })
+  },
+
   fetchEvent(id) {
     return http.get(`/events/${id}`).then(({ data }) => {
       return data

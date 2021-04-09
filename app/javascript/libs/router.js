@@ -9,6 +9,7 @@ import Profile from '../pages/profile/container'
 import ProfileEdit from '../pages/profile/edit'
 import MyEvents from '../pages/profile/my_events'
 import Favorites from '../pages/profile/favorites'
+import EventEdit from '../pages/events/edit'
 
 import EventContainer from '../pages/events/container'
 import EventComments from '../pages/events/comments'
@@ -50,6 +51,10 @@ const router = new Router({
         {
           path: '/profile/my_events',
           component: MyEvents
+        },
+        {
+          path: '/profile/my_events/:id/edit',
+          component: EventEdit
         },
         {
           path: '/profile/favorites',

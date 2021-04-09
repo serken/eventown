@@ -69,4 +69,6 @@
   }
 </script>
 <style lang="sass">
+  .notifications
+    z-index: 9999
 </style>

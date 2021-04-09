@@ -30,12 +30,6 @@
       <div class="text--primary">
 
       </div>
-      <v-chip
-        v-if="!event.active"
-        class="ma-2"
-      >
-        Неактивен
-      </v-chip>
       <span class="text-h5">
         {{event.start_time}}
       </span>
@@ -44,7 +38,22 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
+      <v-chip
+        v-if="!event.active"
+        class="ma-2"
+      >
+        Неактивен
+      </v-chip>
       <v-spacer></v-spacer>
+      <v-btn
+        v-if="isMyEvent"
+        icon
+        :to="`/profile/my_events/${event.id}/edit`"
+      >
+        <v-icon>
+          mdi-pencil-outline
+        </v-icon>
+      </v-btn>
       <v-btn
         icon
         v-if="currentUser"
@@ -86,6 +95,10 @@
 
       isFavorite: function() {
         return this.currentUser.favorite_events.map(i => i.favoritable_id).includes(this.event.id)
+      },
+
+      isMyEvent: function() {
+        return this.currentUser && this.currentUser.events.map(i => i.id).includes(this.event.id)
       },
 
       ...mapGetters("user", ["currentUser"])

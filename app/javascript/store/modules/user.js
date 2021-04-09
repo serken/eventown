@@ -22,6 +22,10 @@ export default {
       commit(types.SET_USER_VALUE, { name, value })
     },
 
+    fetchCurrentUser: function({ commit }) {
+      commit(types.FETCH_CURRENT_USER)
+    },
+
     signOut: function({commit}) {
       commit(types.SIGN_OUT_USER, null)
     }
@@ -41,6 +45,12 @@ export default {
       api.signOut()
       state.user = null
       setLocalStorage(state.user)
+    },
+    [types.FETCH_CURRENT_USER]: function(state) {
+      api.fetchCurrentUser().then((user) => {
+        state.user = user
+        setLocalStorage(user)
+      })
     }
   }
 }

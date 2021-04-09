@@ -188,7 +188,7 @@
 </template>
 
 <script>
-
+import { mapActions, mapState, mapGetters } from "vuex"
 export default {
 
   data: function() {
@@ -245,12 +245,15 @@ export default {
 
       this.$api.createEvent(formData).then((response) => {
         this.$eventBus.$emit('show-flash', { type: 'info', text: 'Событие создано' })
+        this.fetchCurrentUser()
         this.$router.push('/')
       }).catch((error) => {
         this.errors = error.errors
         this.$eventBus.$emit('show-flash', { type: 'error', text: error.full_errors })
       })
-    }
+    },
+
+    ...mapActions("user", ["fetchCurrentUser"])
   }
 }
 </script>

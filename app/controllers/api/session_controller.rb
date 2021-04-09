@@ -9,6 +9,10 @@ class Api::SessionController < Api::ApiController
     end
   end
 
+  def restore
+    render json: current_user
+  end
+
   def sign_out
     if current_user
       session[:user_id] = nil
