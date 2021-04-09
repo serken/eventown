@@ -45,13 +45,19 @@
               label="Введите пароль"
               type="password"
               required
-            ></v-text-field>
-
-          </v-row>
+            ></v-text-field>            
+          </v-row>                                
         </v-container>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
+        <v-btn
+          text
+          height="48"
+          @click=""
+        >
+          Забыли пароль?
+        </v-btn>
         <v-btn
           text
           height="48"
