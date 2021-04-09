@@ -1,7 +1,10 @@
 <template>
   <div>
+    <div>
+      HERE EVENT BASE
+    </div>
     <v-tabs>
-      <v-tab :to="`/events/${event.id}`">О Событии</v-tab>
+      <v-tab :to="`/events/${event.id}/about`">О Событии</v-tab>
       <v-tab :to="`/events/${event.id}/comments`">Комментарии</v-tab>
     </v-tabs>
     <router-view :event="event" @update-event="updateEvent"/>
