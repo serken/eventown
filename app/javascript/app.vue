@@ -7,7 +7,7 @@
 
       <FlashMessage :position="'top right'" />
       <!-- Provides the application the proper gutter -->
-      <v-container fluid>
+      <v-container>
 
         <!-- If using vue-router -->
         <router-view></router-view>
@@ -69,8 +69,4 @@
   }
 </script>
 <style lang="sass">
-  .v-main
-    padding-top: 100px !important
-  .notifications
-    z-index: 9999
 </style>
