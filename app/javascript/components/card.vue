@@ -1,8 +1,7 @@
 <template>
   <v-card
     class="mx-auto my-12"
-    max-width="374"
-    :to="`/events/${event.id}`"
+    max-width="300"
   >
     <template slot="progress">
       <v-progress-linear
@@ -12,56 +11,54 @@
       ></v-progress-linear>
     </template>
 
-    <v-img
-      height="250"
-      :src="`${event.pic}`"
-    ></v-img>
-    <v-card-text>
-      {{event.type}}
-    </v-card-text>
-    <v-card-text v-if="!event.active">
-      <v-chip
-        class="ma-2"
-      >Неактивен
-      </v-chip>
-    </v-card-text>
-    <v-card-title>{{event.title}}
-
-      <v-icon
-        v-if="currentUser"
-        @click="makeFavorite"
+    <router-link :to="`/events/${event.id}`">
+      <v-img
+        height="250"
+        contain
+        :src="`${event.pic}`"
+        :lazy-src="'https://mizez.com/custom/mizez/img/general/no-image-available.png'"
       >
-        {{ isFavorite ? 'mdi-star' : 'mdi-star-outline' }}
-      </v-icon>
-    </v-card-title>
-    <v-card-text>
-
-      <div class="my-4 subtitle-1">
-        Цена: $ {{event.cost}}
-      </div>
-      <div class="my-4 subtitle-1">
-        Город: {{event.location}}
-      </div>
-
-      <div>{{event.description}}</div>
-    </v-card-text>
-
-    <v-divider class="mx-4"></v-divider>
+      </v-img>
+    </router-link>
 
     <v-card-text>
+      <div>{{event.type}}</div>
+      <p class="display-1 text--primary">
+        {{event.title}}
+      </p>
+      <p>Цена: $ {{event.cost}}</p>
+      <div class="text--primary">
+
+      </div>
+      <v-chip
+        v-if="!event.active"
+        class="ma-2"
+      >
+        Неактивен
+      </v-chip>
       <span class="text-h5">
         {{event.start_time}}
       </span>
       <br>
       {{formatedDate}}
     </v-card-text>
-
+    <v-divider></v-divider>
     <v-card-actions>
+      <v-spacer></v-spacer>
       <v-btn
-        color="deep-purple lighten-2"
-        text
+        icon
+        v-if="currentUser"
+        @click="makeFavorite"
       >
-        +{{event.phone_number}}
+        <v-icon>{{ isFavorite ? 'mdi-star' : 'mdi-star-outline' }}</v-icon>
+      </v-btn>
+
+      <v-btn
+        icon
+      >
+        <v-icon>
+          mdi-share-outline
+        </v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>
