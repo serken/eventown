@@ -29,15 +29,14 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-app-bar>
-        <v-card-text>
-          <v-container>
+      <v-card-text>
+        <v-container>
           <v-form
-            ref="form"
             v-model="valid"
-            lazy-validation
+            @submit.prevent="reg"
           >
             <v-row>
-              <v-text-field                
+              <v-text-field
                 v-model="email"
                 :rules="emailRules"
                 :error-messages="errors.email"
@@ -66,7 +65,7 @@
                 name="confirmPassword"
                 type="password"
                 required
-              ></v-text-field>            
+              ></v-text-field>
             </v-row>
 
             <v-row>
@@ -100,34 +99,28 @@
                 label="Введите название организации"
               ></v-text-field>
 
-            <v-row>
-
-            </v-row>
-            
-          
-      
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            text
-            height="48"
-            @click="$emit('clear-sign-up');$emit('sign-in')"
-          >
-            <v-icon>mdi-account</v-icon>
-            Уже есть аккаунт?
-          </v-btn>
-          <v-btn
-              :disabled="!valid"
-              color="success"
-              class="mr-4"
-              @click="reg"
-            >
-              Зарегистрироваться
-            </v-btn>
-        </v-card-actions>
-      </v-form>  
-          </v-container>
-        </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                text
+                height="48"
+                @click="$emit('clear-sign-up');$emit('sign-in')"
+              >
+                <v-icon>mdi-account</v-icon>
+                Уже есть аккаунт?
+              </v-btn>
+              <v-btn
+                  :disabled="!valid"
+                  color="success"
+                  class="mr-4"
+                  type="submit"
+                >
+                  Зарегистрироваться
+                </v-btn>
+            </v-card-actions>
+          </v-form>
+        </v-container>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
@@ -147,22 +140,21 @@ export default {
   data: function() {
     return {
       valid: true,
-      email: null,
-      password: null,
-      confirmPassword: null,
       email: '',
       password: '',
       confirmPassword: '',
       passwordRules: [
         (value) => !!value || 'Пожалуйста, заполните пароль.',
         (value) => (value && value.length >= 8 ) || 'минимум 8 символов',
+        (value) =>
+          this.confirmPassword.length > 0 && value === this.confirmPassword || 'Подтверждение пароля не совпадает.',
       ],
       confirmPasswordRules: [
         (value) => !!value || 'Пожалуйста, заполните подтверждение пароля.',
         (value) =>
           value === this.password || 'Подтверждение пароля не совпадает.',
       ],
-      confirm: '',      
+      confirm: '',
       email: '',
       is_org: false,
       first_name: '',
@@ -187,7 +179,7 @@ export default {
     reg: function() {
       const params = {
         email: this.email,
-        password: this.password,        
+        password: this.password,
         is_org: this.is_org,
         org_name: this.org_name,
         first_name: this.first_name,
