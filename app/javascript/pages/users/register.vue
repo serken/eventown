@@ -31,90 +31,96 @@
       </v-app-bar>
       <v-card-text>
         <v-container>
-          <v-row>
-            <v-text-field
-              v-model="email"
-              :rules="emailRules"
-              :error-messages="errors.email"
-              label="Введите свой email"
-              required
-            ></v-text-field>
-          </v-row>
+          <v-form
+            v-model="valid"
+            @submit.prevent="reg"
+          >
+            <v-row>
+              <v-text-field
+                v-model="email"
+                :rules="emailRules"
+                :error-messages="errors.email"
+                label="Введите свой email"
+                required
+              ></v-text-field>
+            </v-row>
 
-          <v-row>
-            <v-text-field
-              v-model="password"
-              :error-messages="errors.password"
-              label="Введите пароль"
-              type="password"
-              required
-            ></v-text-field>
-          </v-row>
+            <v-row>
+              <v-text-field
+                v-model="password"
+                :rules="passwordRules"
+                :error-messages="errors.password"
+                label="Введите пароль"
+                type="password"
+                required
+              ></v-text-field>
+            </v-row>
 
-          <v-row>
-            <v-text-field
-              v-model="confirm"
-              label="Подтвердите пароль"
-              type="password"
-              required
-            ></v-text-field>
-          </v-row>
+            <v-row>
+              <v-text-field
+                v-model="confirmPassword"
+                :rules="confirmPasswordRules"
+                :error-messages="errors.confirmPassword"
+                label="Подтвердите пароль"
+                name="confirmPassword"
+                type="password"
+                required
+              ></v-text-field>
+            </v-row>
 
-          <v-row>
+            <v-row>
 
-            <v-text-field
-              v-model="first_name"
-              label="Введите свое имя"
-            ></v-text-field>
+              <v-text-field
+                v-model="first_name"
+                label="Введите свое имя"
+              ></v-text-field>
 
-          </v-row>
+            </v-row>
 
-          <v-row>
-            <v-text-field
-              v-model="last_name"
-              label="Введите свою фамилию"
-            ></v-text-field>
+            <v-row>
+              <v-text-field
+                v-model="last_name"
+                label="Введите свою фамилию"
+              ></v-text-field>
 
-          </v-row>
+            </v-row>
 
-          <v-row>
-            <v-checkbox
-              v-model="is_org"
-              label="Зарегистрироваться как организация?"
-            ></v-checkbox>
+            <v-row>
+              <v-checkbox
+                v-model="is_org"
+                label="Зарегистрироваться как организация?"
+              ></v-checkbox>
 
-          </v-row>
+            </v-row>
 
-            <v-text-field
-              v-if="is_org"
-              v-model="org_name"
-              label="Введите название организации"
-            ></v-text-field>
+              <v-text-field
+                v-if="is_org"
+                v-model="org_name"
+                label="Введите название организации"
+              ></v-text-field>
 
-          <v-row>
-
-          </v-row>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                text
+                height="48"
+                @click="$emit('clear-sign-up');$emit('sign-in')"
+              >
+                <v-icon>mdi-account</v-icon>
+                Уже есть аккаунт?
+              </v-btn>
+              <v-btn
+                  :disabled="!valid"
+                  color="success"
+                  class="mr-4"
+                  type="submit"
+                >
+                  Зарегистрироваться
+                </v-btn>
+            </v-card-actions>
+          </v-form>
         </v-container>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn
-          text
-          height="48"
-          @click="$emit('clear-sign-up');$emit('sign-in')"
-        >
-          <v-icon>mdi-account</v-icon>
-          Уже есть аккаунт?
-        </v-btn>
-        <v-btn
-          :disabled="!valid"
-          color="success"
-          class="mr-4"
-          @click="reg"
-        >
-          Зарегистрироваться
-        </v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -133,10 +139,22 @@ export default {
 
   data: function() {
     return {
+      valid: true,
       email: '',
       password: '',
+      confirmPassword: '',
+      passwordRules: [
+        (value) => !!value || 'Пожалуйста, заполните пароль.',
+        (value) => (value && value.length >= 8 ) || 'минимум 8 символов',
+        (value) =>
+          this.confirmPassword.length > 0 && value === this.confirmPassword || 'Подтверждение пароля не совпадает.',
+      ],
+      confirmPasswordRules: [
+        (value) => !!value || 'Пожалуйста, заполните подтверждение пароля.',
+        (value) =>
+          value === this.password || 'Подтверждение пароля не совпадает.',
+      ],
       confirm: '',
-      valid: true,
       email: '',
       is_org: false,
       first_name: '',
