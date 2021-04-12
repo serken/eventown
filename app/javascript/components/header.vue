@@ -44,12 +44,19 @@
         :show-dialog="signInDialog"
         @sign-up="signUp"
         @clear-sign-in="clearSignIn"
+        @forget-password="forgetPassword"
       />
       <sign-up
         v-if="!signedIn"
         :show-dialog="signUpDialog"
         @sign-in="signIn"
         @clear-sign-up="clearSignUp"
+      />
+      <forget
+        v-if="!signedIn"
+        :show-dialog="forgetDialog"
+        @clear-forget="clearForget"
+        @clear-sign-in="clearSignIn"
       />
       <v-btn
         v-else
@@ -85,6 +92,7 @@
 import { mapActions, mapState, mapGetters } from "vuex"
 import SignIn from "../pages/users/sign_in"
 import SignUp from "../pages/users/register"
+import Forget from "../pages/users/forget"
 
 import LeftMenu from "components/left_menu"
 import RightMenu from "components/right_menu"
@@ -94,7 +102,8 @@ export default {
     "sign-in": SignIn,
     "sign-up": SignUp,
     "left-menu": LeftMenu,
-    "right-menu": RightMenu
+    "right-menu": RightMenu,
+    "forget": Forget
   },
 
   data: function() {
@@ -102,7 +111,8 @@ export default {
       signInDialog: null,
       signUpDialog: null,
       showLeftPanel: false,
-      showRightPanel: false
+      showRightPanel: false,
+      forgetDialog: null
     }
   },
 
@@ -151,6 +161,15 @@ export default {
     },
 
     clearSignIn: function() {
+      this.signInDialog = null
+    },
+
+    clearForget: function() {
+      this.forgetDialog = null
+    },
+
+    forgetPassword: function() {
+      this.forgetDialog = true
       this.signInDialog = null
     },
 

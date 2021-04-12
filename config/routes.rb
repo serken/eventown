@@ -1,9 +1,17 @@
+require 'sidekiq/web'
+require 'sidekiq_unique_jobs/web'
+require 'sidekiq/cron/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web, at: '/sidekiq'
+
   namespace :api, defaults: {format: 'json'} do
     post 'sign_in', to: 'session#sign_in'
     post 'sign_up', to: 'users#create'
     delete 'sign_out', to: 'session#sign_out'
     get 'restore_session', to: 'session#restore'
+    post 'restore_password', to: 'session#restore_password'
+    post 'update_password', to: 'session#update_password'
 
     resources :events do
       member do

@@ -18,6 +18,7 @@ import EventPage from '../pages/events/event'
 import AdminUsersList from '../pages/admin/users/list'
 import AdminEventsList from '../pages/admin/events/list'
 import Admin from '../pages/admin/index'
+import RestorePassword from '../pages/users/restore_password'
 
 Vue.use(Router)
 
@@ -89,6 +90,10 @@ const router = new Router({
           component: AdminEventsList
         }
       ]
+    },
+    {
+      path: '/restore_password',
+      component: RestorePassword
     }
   ],
 })

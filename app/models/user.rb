@@ -18,4 +18,12 @@ class User < ApplicationRecord
   def commented_users
     self.my_comments.where(commentable_type: 'User')
   end
+
+  def create_restore_token
+    self.update_attributes(restore_token: "#{self.id}#{Time.now.to_i}")
+  end
+
+  def reset_password_url
+    ENV['ROOT_URL'] + "restore_password?token=#{self.restore_token}"
+  end
 end

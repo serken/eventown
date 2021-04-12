@@ -172,6 +172,7 @@ export default {
         this.dialog = false
         this.$eventBus.$emit('show-flash', { type: 'info', text: 'Регистрация прошла успешно. Благодарочка' })
         this.setUser(data)
+        this.$router.push('/').catch(() => {})
       }).catch((error) => {
         this.errors = error.errors
         this.$eventBus.$emit('show-flash', { type: 'error', text: error.full_errors })

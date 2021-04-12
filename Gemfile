@@ -24,6 +24,10 @@ gem 'responders'
 
 gem 'cloudinary'
 gem 'carrierwave'
+gem 'sendgrid-ruby'
+gem 'sidekiq'
+gem 'sidekiq-cron', '~> 1.1'
+gem 'sidekiq-unique-jobs'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 

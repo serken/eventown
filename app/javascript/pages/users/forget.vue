@@ -6,7 +6,7 @@
     >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
-
+        v-show="false"
         dark
         text
         height="48"
@@ -14,18 +14,18 @@
         v-on="on"
       >
         <v-icon>mdi-account</v-icon>
-        Войти
+        Восстановление пароля
       </v-btn>
     </template>
     <v-card>
       <v-app-bar>
         <v-toolbar-title>
-          Авторизация
+          Восстановление пароля
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="$emit('clear-sign-in')">
+        <v-btn icon @click="$emit('clear-forget')">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-app-bar>
@@ -39,40 +39,16 @@
               required
             ></v-text-field>
           </v-row>
-          <v-row>
-            <v-text-field
-              v-model="password"
-              label="Введите пароль"
-              type="password"
-              required
-            ></v-text-field>
-          </v-row>
         </v-container>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          text
-          height="48"
-          @click="forgetPassword"
-        >
-          Забыли пароль?
-        </v-btn>
-        <v-btn
-          text
-          height="48"
-          @click="$emit('clear-sign-up');$emit('sign-up')"
-        >
-          <v-icon>mdi-account</v-icon>
-          Еще не зарегистрированы?
-        </v-btn>
-        <v-btn
-          :disabled="!valid"
           color="success"
           class="mr-4"
-          @click="signIn"
+          @click="restore"
         >
-          Войти
+          Восстановить
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -93,8 +69,6 @@ export default {
   data: function() {
     return {
       email: '',
-      password: '',
-      valid: true,
       dialog: false,
       emailRules: [
         v => !!v || 'Пожалуйста,заполните электронную почту.',
@@ -109,25 +83,17 @@ export default {
   },
 
   methods: {
-    signIn: function() {
+    restore: function() {
       const params = {
-        email: this.email,
-        password: this.password
+        email: this.email
       }
-      this.$api.signIn(params).then((user) => {
-        this.$emit('clear-sign-in')
-        this.setUser(user)
+      this.$api.restorePassword(params).then((response) => {
+        this.$emit('clear-forget')
         this.dialog = false
-        this.$eventBus.$emit('show-flash', { type: 'info', text: 'Авторизация удалась. Welcome' })
+        this.$eventBus.$emit('show-flash', { type: 'info', text: response })
         this.$router.push('/').catch(() => {})
       }).catch((error) => {
-        this.$eventBus.$emit('show-flash', { type: 'error', text: error.errors })
       })
-    },
-
-    forgetPassword: function() {
-      this.$emit('clear-sign-in')
-      this.$emit('forget-password')
     },
 
     ...mapActions("user", ["setUser"])

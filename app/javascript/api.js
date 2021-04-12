@@ -110,4 +110,16 @@ export default {
       return data
     })
   },
+
+  restorePassword(params) {
+    return http.post('/restore_password', params).then(({ data }) => {
+      return data
+    })
+  },
+
+  updatePassword(params) {
+    return http.post('/update_password', params).then(({ data }) => {
+      return data
+    })
+  }
 }
