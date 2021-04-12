@@ -33,8 +33,17 @@
       }
     },
 
+    computed: {
+      ...mapGetters("user", ["currentUser"])
+    },
+
     methods: {
       addComment: function() {
+        if(!this.currentUser) {
+          this.$eventBus.$emit('show-sign-in-form')
+          return
+        }
+
         this.$api.addEventComment(this.event.id, this.message).then((data) => {
           this.$emit('update-event', data)
         })

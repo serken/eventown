@@ -111,6 +111,7 @@ export default {
     this.$eventBus.$on('sign-out', this.signOutUser)
     this.$eventBus.$on('toggle-right', this.toggleRight)
     this.$eventBus.$on('toggle-left', this.toggleLeft)
+    this.$eventBus.$on('show-sign-in-form', this.signIn)
   },
 
   computed: {

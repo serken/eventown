@@ -36,7 +36,7 @@
 
     computed: {
       isMyEvent: function() {
-        return this.currentUser.events.map(i => i.id).includes(this.event.id)
+        return this.currentUser && this.currentUser.events.map(i => i.id).includes(this.event.id)
       },
 
       ...mapGetters("user", ["currentUser"])

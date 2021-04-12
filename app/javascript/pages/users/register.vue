@@ -25,7 +25,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="dialog = false">
+        <v-btn icon @click="$emit('clear-sign-up')">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-app-bar>

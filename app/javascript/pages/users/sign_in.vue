@@ -25,7 +25,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="dialog = false">
+        <v-btn icon @click="$emit('clear-sign-in')">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-app-bar>
@@ -45,8 +45,8 @@
               label="Введите пароль"
               type="password"
               required
-            ></v-text-field>            
-          </v-row>                                
+            ></v-text-field>
+          </v-row>
         </v-container>
       </v-card-text>
       <v-card-actions>
