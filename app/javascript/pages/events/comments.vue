@@ -1,23 +1,18 @@
 <template>
   <div>
-    <v-text-field v-model="message">
-    </v-text-field>
+    <v-textarea v-model="message" placeholder="Комментарий...">
+    </v-textarea>
     <v-btn @click="addComment">
       Добавить комментарий
     </v-btn>
-    <div v-for="comment in event.comments">
-
-      <div>
-        <v-icon @click="deleteComment(comment.id)" >
-          mdi-close
-        </v-icon>
-        {{comment.message}}
-      </div>
-    </div>
+    <template v-for="comment in event.comments">
+      <comment :comment="comment" @delete-comment="deleteComment"/>
+    </template>
   </div>
 </template>
 <script>
   import { mapActions, mapState, mapGetters } from "vuex"
+  import Comment from "./../../components/comment"
 
   export default {
 
@@ -29,6 +24,7 @@
     },
 
     components: {
+      'comment': Comment
     },
 
     data: function() {
