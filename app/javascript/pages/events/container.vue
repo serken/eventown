@@ -6,6 +6,7 @@
     <v-tabs>
       <v-tab :to="`/events/${event.id}/about`">О Событии</v-tab>
       <v-tab :to="`/events/${event.id}/comments`">Комментарии</v-tab>
+      <v-tab v-if="isMyEvent" :to="`/events/${event.id}/edit`">Обновить Событие</v-tab>
     </v-tabs>
     <router-view :event="event" @update-event="updateEvent"/>
   </div>
@@ -31,6 +32,14 @@
 
     mounted: function() {
       this.fetchEvent()
+    },
+
+    computed: {
+      isMyEvent: function() {
+        return this.currentUser.events.map(i => i.id).includes(this.event.id)
+      },
+
+      ...mapGetters("user", ["currentUser"])
     },
 
     methods: {

@@ -48,7 +48,7 @@
       <v-btn
         v-if="isMyEvent"
         icon
-        :to="`/profile/my_events/${event.id}/edit`"
+        :to="`/events/${event.id}/edit`"
       >
         <v-icon>
           mdi-pencil-outline

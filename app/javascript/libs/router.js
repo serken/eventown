@@ -53,10 +53,6 @@ const router = new Router({
           component: MyEvents
         },
         {
-          path: '/profile/my_events/:id/edit',
-          component: EventEdit
-        },
-        {
           path: '/profile/favorites',
           component: Favorites
         }
@@ -73,7 +69,11 @@ const router = new Router({
         {
           path: '/events/:id/comments',
           component: EventComments
-        }
+        },
+        {
+          path: '/events/:id/edit',
+          component: EventEdit
+        },
       ]
     },
     {

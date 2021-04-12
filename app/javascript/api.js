@@ -69,6 +69,18 @@ export default {
     })
   },
 
+  updateEvent(id, params = {}) {
+     return http.patch(`/events/${id}`, params).then(({ data }) => {
+      return data
+    })
+  },
+
+  updateUser(id, params = {}) {
+     return http.patch(`/users/${id}`, params).then(({ data }) => {
+      return data
+    })
+  },
+
   makeFavorite(id) {
      return http.post(`/events/${id}/favorite`).then(({ data }) => {
       return data
