@@ -69,7 +69,7 @@ export default {
         (value) => !!value || 'Пожалуйста, заполните пароль.',
         (value) => (value && value.length >= 8 ) || 'минимум 8 символов',
         (value) =>
-          this.confirmPassword.length > 0 && value === this.confirmPassword || 'Подтверждение пароля не совпадает.',
+          this.confirm.length > 0 && value === this.confirm || 'Подтверждение пароля не совпадает.',
       ],
       confirmPasswordRules: [
         (value) => !!value || 'Пожалуйста, заполните подтверждение пароля.',

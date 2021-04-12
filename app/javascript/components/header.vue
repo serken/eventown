@@ -170,7 +170,7 @@ export default {
 
     forgetPassword: function() {
       this.forgetDialog = true
-      this.signInDialog = null
+      this.signInDialog = false
     },
 
     ...mapActions("user", ["signOut"])

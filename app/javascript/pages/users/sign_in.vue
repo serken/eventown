@@ -61,7 +61,7 @@
         <v-btn
           text
           height="48"
-          @click="$emit('clear-sign-up');$emit('sign-up')"
+          @click="$emit('clear-sign-in');$emit('sign-up')"
         >
           <v-icon>mdi-account</v-icon>
           Еще не зарегистрированы?
