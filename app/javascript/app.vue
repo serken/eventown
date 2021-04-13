@@ -2,10 +2,10 @@
   <v-app>
     <main-header />
 
+    <FlashMessage :position="'right bottom'" />
     <!-- Sizes your content based upon application components -->
     <v-main>
 
-      <FlashMessage :position="'top right'" />
       <!-- Provides the application the proper gutter -->
       <v-container>
 
@@ -59,9 +59,9 @@
           status: flash.type,
           time: 5000,
           clickable: false,
-          icon: "icon",
           blockClass: `notifications`,
-          message: flash.text
+          message: flash.text,
+          icon: false
         })
       }
     }
@@ -71,4 +71,7 @@
 <style lang="sass">
   .notifications
     z-index: 9999
+  .v-main__wrap
+    background-color: rgba(0,110,250,0.05)
+
 </style>

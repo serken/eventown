@@ -1,10 +1,11 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card
-      class="mx-auto my-12"
+      class="mx-auto my-6 event-card"
       :elevation="hover ? 16 : 2"
       :class="{ 'on-hover': hover }"
-      max-width="300"
+      max-width="250"
+      shaped
       @click="$router.push(`/events/${event.id}/about`)"
     >
       <template slot="progress">
@@ -25,8 +26,8 @@
 
       <v-card-text>
         <div>{{event.type}}</div>
-        <p class="display-1 text--primary">
-          {{event.title}}
+        <p class="title text--primary cropped" v-tooltip :title="event.title">
+          {{event.title.replace(/(.{15})..+/, "$1…")}}
         </p>
         <p>Цена: $ {{event.cost}}</p>
         <div class="text--primary">
@@ -50,7 +51,9 @@
         <v-btn
           v-if="isMyEvent"
           icon
+          @click.stop
           :to="`/events/${event.id}/edit`"
+          @mousedown.stop
         >
           <v-icon>
             mdi-pencil-outline
@@ -67,6 +70,8 @@
 
         <v-btn
           icon
+          @click.stop
+          @mousedown.stop
         >
           <v-icon>
             mdi-share-outline
@@ -126,4 +131,7 @@
   background-color: rgba(#FFF, 0.8)
   >.v-card__text
     color: #000
+.event-card
+  flex: 1 0 21%
+  margin: 5px
 </style>

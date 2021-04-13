@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <div>
     <v-dialog
       v-model="dialog"
       hide-overlay
@@ -26,7 +26,7 @@
       <card v-for="event in getEvents" :event="event" :key="event.id"/>
     </v-row>
     <v-pagination v-model="page" :total-visible="7" :length="total" :per-page="perPage" @input="pageChanged" />
-  </v-col>
+  </div>
 </template>
 
 <script>
@@ -44,7 +44,7 @@
     data: function() {
       return {
         page: 1,
-        perPage: 6,
+        perPage: 12,
         total: null,
         dialog: false,
         filters: [],
