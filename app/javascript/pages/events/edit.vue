@@ -219,7 +219,7 @@ export default {
     fetchEvent: function() {
       this.$api.fetchEvent(this.$router.currentRoute.params.id).then((event) => {
         this.event = event
-        this.event.event_type = this.eventTypes.find(i=> i.text == event.type)
+        this.event.event_type = this.eventTypes.find(i=> i.text == event.type).value
       })
     },
 

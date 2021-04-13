@@ -85,20 +85,6 @@
 
             </v-row>
 
-            <v-row>
-              <v-checkbox
-                v-model="is_org"
-                label="Зарегистрироваться как организация?"
-              ></v-checkbox>
-
-            </v-row>
-
-              <v-text-field
-                v-if="is_org"
-                v-model="org_name"
-                label="Введите название организации"
-              ></v-text-field>
-
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -145,12 +131,11 @@ export default {
       confirmPassword: '',
       passwordRules: [
         (value) => !!value || 'Пожалуйста, заполните пароль.',
-        (value) => (value && value.length >= 8 ) || 'минимум 8 символов',
-        (value) =>
-          this.confirmPassword.length > 0 && value === this.confirmPassword || 'Подтверждение пароля не совпадает.',
+        (value) => (value && value.length >= 8 ) || 'минимум 8 символов'
       ],
       confirmPasswordRules: [
-        (value) => !!value || 'Пожалуйста, заполните подтверждение пароля.',
+        (value) => !!value  || 'Пожалуйста, заполните подтверждение пароля.',
+        (value) => (value && value.length >= 8 ) || 'минимум 8 символов',
         (value) =>
           value === this.password || 'Подтверждение пароля не совпадает.',
       ],

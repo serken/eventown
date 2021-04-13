@@ -45,6 +45,7 @@
         }
 
         this.$api.addEventComment(this.event.id, this.message).then((data) => {
+          this.message = ''
           this.$emit('update-event', data)
         })
       },
