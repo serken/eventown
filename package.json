@@ -30,6 +30,7 @@
     "sass-variable-loader": "^0.1.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "vee-validate": "^3.4.5",
     "vue": "^2.6.10",
     "vue-flatpickr-component": "^7.0.1",
     "vue-kindergarten": "^0.3.3",

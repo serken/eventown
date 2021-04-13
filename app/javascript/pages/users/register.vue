@@ -31,80 +31,101 @@
       </v-app-bar>
       <v-card-text>
         <v-container>
-          <v-form
-            v-model="valid"
-            @submit.prevent="reg"
+          <validation-observer
+            ref="observer"
+            v-slot="{ invalid }"
           >
-            <v-row>
-              <v-text-field
-                v-model="email"
-                :rules="emailRules"
-                :error-messages="errors.email"
-                label="Введите свой email"
-                required
-              ></v-text-field>
-            </v-row>
-
-            <v-row>
-              <v-text-field
-                v-model="password"
-                :rules="passwordRules"
-                :error-messages="errors.password"
-                label="Введите пароль"
-                type="password"
-                required
-              ></v-text-field>
-            </v-row>
-
-            <v-row>
-              <v-text-field
-                v-model="confirmPassword"
-                :rules="confirmPasswordRules"
-                :error-messages="errors.confirmPassword"
-                label="Подтвердите пароль"
-                name="confirmPassword"
-                type="password"
-                required
-              ></v-text-field>
-            </v-row>
-
-            <v-row>
-
-              <v-text-field
-                v-model="first_name"
-                label="Введите свое имя"
-              ></v-text-field>
-
-            </v-row>
-
-            <v-row>
-              <v-text-field
-                v-model="last_name"
-                label="Введите свою фамилию"
-              ></v-text-field>
-
-            </v-row>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                text
-                height="48"
-                @click="$emit('clear-sign-up');$emit('sign-in')"
-              >
-                <v-icon>mdi-account</v-icon>
-                Уже есть аккаунт?
-              </v-btn>
-              <v-btn
-                  :disabled="!valid"
-                  color="success"
-                  class="mr-4"
-                  type="submit"
+            <v-form
+              v-model="valid"
+              @submit.prevent="reg"
+            >
+              <v-row>
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="email"
+                  rules="required|email"
                 >
-                  Зарегистрироваться
+                  <v-text-field
+                    v-model="email"
+                    :error-messages="errors"
+                    label="Введите свой email"
+                    required
+                  ></v-text-field>
+                </validation-provider>
+              </v-row>
+
+              <v-row>
+                <validation-provider
+                  v-slot="{ errors }"
+                  vid="password"
+                  name="password"
+                  rules="required|min:8"
+                >
+                  <v-text-field
+                    v-model="password"
+                    :error-messages="errors"
+                    label="Введите пароль"
+                    type="password"
+                    required
+                  ></v-text-field>
+                </validation-provider>
+              </v-row>
+
+              <v-row>
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="confirm_password"
+                  rules="required|confirmed:password"
+                >
+                  <v-text-field
+                    v-model="confirmPassword"
+                    :error-messages="errors"
+                    label="Подтвердите пароль"
+                    name="confirmPassword"
+                    type="password"
+                    required
+                  ></v-text-field>
+                </validation-provider>
+              </v-row>
+
+              <v-row>
+
+                <v-text-field
+                  v-model="first_name"
+                  label="Введите свое имя"
+                ></v-text-field>
+
+              </v-row>
+
+              <v-row>
+                <v-text-field
+                  v-model="last_name"
+                  label="Введите свою фамилию"
+                ></v-text-field>
+
+              </v-row>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  text
+                  height="48"
+                  @click="$emit('clear-sign-up');$emit('sign-in')"
+                >
+                  <v-icon>mdi-account</v-icon>
+                  Уже есть аккаунт?
                 </v-btn>
-            </v-card-actions>
-          </v-form>
+                <v-btn
+                    :disabled="!valid"
+                    color="success"
+                    class="mr-4"
+                    type="submit"
+                  >
+                    Зарегистрироваться
+                  </v-btn>
+              </v-card-actions>
+            </v-form>
+          </validation-observer>
         </v-container>
       </v-card-text>
     </v-card>
@@ -113,6 +134,31 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex"
+import { required, confirmed, email, min } from 'vee-validate/dist/rules'
+import { extend, setInteractionMode } from 'vee-validate'
+
+setInteractionMode('eager')
+
+  extend('confirmed', {
+    ...confirmed,
+    message: 'Подтверждение пароля не совпадает',
+  })
+
+  extend('required', {
+    ...required,
+    message: 'Пожалуйста, заполните поле',
+  })
+
+  extend('min', {
+    ...min,
+    message: 'Vинимум {length} cbvdjkjd',
+  })
+
+  extend('email', {
+    ...email,
+    message: 'Неверно введена почта',
+  })
+
 
 export default {
 
@@ -162,11 +208,11 @@ export default {
 
   methods: {
     reg: function() {
+      this.$refs.observer.validate()
+
       const params = {
         email: this.email,
         password: this.password,
-        is_org: this.is_org,
-        org_name: this.org_name,
         first_name: this.first_name,
         last_name: this.last_name
       }

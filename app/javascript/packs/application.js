@@ -19,6 +19,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import vuetify from "../plugins/vuetify"
 import FlashMessage from '@smartweb/vue-flash-message'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
 
 //import '../assets/global.scss'
 
@@ -34,6 +35,8 @@ export const EventBus = new Vue()
 
 Vue.use(Vuex)
 Vue.use(FlashMessage, { strategy: "multiple" })
+Vue.component('validation-provider', ValidationProvider)
+Vue.component('validation-observer', ValidationProvider)
 
 Vue.prototype.$moment = moment;
 Vue.prototype.$api = api

@@ -26,7 +26,7 @@
 
       <v-card-text>
         <div>{{event.type}}</div>
-        <p class="title text--primary cropped" v-tooltip :title="event.title">
+        <p class="title text--primary cropped">
           {{event.title.replace(/(.{15})..+/, "$1…")}}
         </p>
         <p>Цена: $ {{event.cost}}</p>
