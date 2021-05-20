@@ -50,4 +50,28 @@ export default {
       return data
     })
   },
+
+  fetchCompanies(params = {}) {
+    return http.get('/admin/companies', params).then(({ data }) => {
+      return data
+    })
+  },
+
+  createCompanies(params = {}) {
+     return http.post('/admin/companies', params).then(({ data }) => {
+      return data
+    })
+  },
+
+  updateCompany(id, params) {
+    return http.patch(`/admin/companies/${id}`, params).then(({ data }) => {
+      return data
+    })
+  },
+
+  deleteCompany(id) {
+    return http.delete(`/admin/companies/${id}`).then(({ data }) => {
+      return data
+    })
+  },
 }

@@ -21,6 +21,7 @@ import NewCompany from '../pages/companies/new'
 
 import AdminUsersList from '../pages/admin/users/list'
 import AdminEventsList from '../pages/admin/events/list'
+import AdminCompaniesList from '../pages/admin/companies/list'
 import Admin from '../pages/admin/index'
 import RestorePassword from '../pages/users/restore_password'
 
@@ -106,6 +107,10 @@ const router = new Router({
         {
           path: '/admin/events',
           component: AdminEventsList
+        },
+        {
+          path: '/admin/companies',
+          component: AdminCompaniesList
         }
       ]
     },

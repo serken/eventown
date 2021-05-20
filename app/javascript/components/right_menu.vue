@@ -19,10 +19,10 @@
       <v-list-item v-if="currentUser" to="/profile/favorites">
         <v-list-item-title>Избранные</v-list-item-title>
       </v-list-item>
-      <v-list-item v-if="currentUser" to="/profile/my_events">
+      <v-list-item v-if="currentUser && currentUser.has_company" to="/profile/my_events">
         <v-list-item-title>Мои События</v-list-item-title>
       </v-list-item>
-      <v-list-item v-if="currentUser" @click="createEvent">
+      <v-list-item v-if="currentUser && currentUser.has_company" @click="createEvent">
         <v-list-item-title>Добавить событие</v-list-item-title>
       </v-list-item>
       <v-list-item @click="signOut">

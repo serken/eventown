@@ -45,7 +45,7 @@ class Api::EventsController < Api::ApiController
   end
 
   def create
-    event = current_user.company.events.new(event_params)
+    event = current_user.company.events.new(event_params.merge(user_id: current_user.id))
     if event.save
       render json: event
     else

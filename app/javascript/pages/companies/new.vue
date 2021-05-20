@@ -138,7 +138,7 @@ export default {
         ([key, value]) => formData.append(key, value)
       )
 
-      this.$api.createEvent(formData).then((response) => {
+      this.$api.createCompany(formData).then((response) => {
         this.$eventBus.$emit('show-flash', { type: 'info', text: 'Компания создана, ожидайте подтверждение от администрации' })
         this.fetchCurrentUser()
         this.$router.push('/')

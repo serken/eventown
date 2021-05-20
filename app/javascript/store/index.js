@@ -3,6 +3,7 @@ import Vuex from "vuex"
 
 import User from "./modules/user"
 import Events from "./modules/events"
+import Companies from "./modules/companies"
 
 Vue.use(Vuex)
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
 
   modules: {
     user: User,
-    events: Events
+    events: Events,
+    companies: Companies
   }
 })

@@ -38,8 +38,9 @@ class Api::CompaniesController < Api::ApiController
   end
 
   def create
-    company = current_user.company.new(company_params)
-    if company.save
+    company = Company.new(company_params)
+
+    if current_user.company = company
       render json: company
     else
       render json: { errors: company.errors.messages, full_errors: company.errors.full_messages }, status: 422

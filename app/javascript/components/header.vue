@@ -35,12 +35,14 @@
       ></v-text-field>
 
       <v-btn
+        v-if="!currentUser.has_company"
         text
         height="48"
         @click="$router.push(`/new_company`)"
       >
         Хотите стать организатором?
       </v-btn>
+
       <v-btn
         text
         height="48"

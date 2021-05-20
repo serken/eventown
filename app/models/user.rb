@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :my_comments, inverse_of: :user, class_name: 'Comment'
   has_many :comments, as: :commentable
   has_one  :company
+  has_many :events
 
   validates :password, presence: true, length: { in: 8..20 }
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'invalid email' }
