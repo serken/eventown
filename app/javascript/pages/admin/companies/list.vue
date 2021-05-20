@@ -233,7 +233,7 @@ export default {
   methods: {
     fetchData: function() {
       this.$adminApi.fetchCompanies().then((data) => {
-        this.companies = data
+        this.companies = data.companies
       })
     },
 
