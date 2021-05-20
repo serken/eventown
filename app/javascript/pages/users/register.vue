@@ -187,10 +187,8 @@ export default {
       ],
       confirm: '',
       email: '',
-      is_org: false,
       first_name: '',
       last_name: '',
-      org_name: '',
       dialog: false,
       errors: {},
       emailRules: [

@@ -83,20 +83,6 @@
                       ></v-text-field>
 
                     </v-row>
-
-                    <v-row>
-                      <v-checkbox
-                        v-model="editedItem.is_org"
-                        label="Организация?"
-                      ></v-checkbox>
-
-                    </v-row>
-                    <v-row>
-                      <v-text-field
-                        v-model="editedItem.org_name"
-                        label="Название организации"
-                      ></v-text-field>
-                    </v-row>
                   </v-container>
                 </v-card-text>
 
@@ -177,8 +163,6 @@ export default {
         { text: 'Email', value: 'email' },
         { text: 'First Name', value: 'first_name' },
         { text: 'Last Name', value: 'last_name' },
-        { text: 'Organization', value: 'org_name' },
-        { text: 'Is Org', value: 'is_org' },
         { text: 'Is Admin', value: 'is_admin' },
         { text: 'Password', value: 'password' },
         { text: 'Created', value: 'created_at' },

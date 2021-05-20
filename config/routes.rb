@@ -27,9 +27,17 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :companies do
+      member do
+        post '/comments', to: 'companies#add_comment'
+        delete '/comments/:comment_id', to: 'companies#delete_comment'
+      end
+    end
+
     namespace :admin do
       resources :events
       resources :users
+      resources :companies
     end
   end
 

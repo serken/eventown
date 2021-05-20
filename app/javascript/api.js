@@ -45,6 +45,12 @@ export default {
     })
   },
 
+  fetchCompanies(params = {}) {
+    return http.get('/companies', params).then(({ data }) => {
+      return data
+    })
+  },
+
   fetchCurrentUser() {
     return http.get('/restore_session').then(({ data }) => {
       return data
@@ -57,8 +63,14 @@ export default {
     })
   },
 
-  fetchUsers(id) {
+  fetchUser(id) {
     return http.get(`/users/${id}`).then(({ data }) => {
+      return data
+    })
+  },
+
+  fetchCompany(id) {
+    return http.get(`/companies/${id}`).then(({ data }) => {
       return data
     })
   },
@@ -71,6 +83,30 @@ export default {
 
   updateEvent(id, params = {}) {
      return http.patch(`/events/${id}`, params).then(({ data }) => {
+      return data
+    })
+  },
+
+  deleteEvent(id) {
+    return http.delete(`/events/${id}`).then(({ data }) => {
+      return data
+    })
+  },
+
+  createCompany(params = {}) {
+     return http.post('/companies', params).then(({ data }) => {
+      return data
+    })
+  },
+
+  updateCompany(id, params = {}) {
+     return http.patch(`/companies/${id}`, params).then(({ data }) => {
+      return data
+    })
+  },
+
+  deleteCompany(id) {
+    return http.delete(`/companies/${id}`).then(({ data }) => {
       return data
     })
   },
@@ -93,6 +129,12 @@ export default {
     })
   },
 
+  addCompanyComment(id, message) {
+    return http.post(`/companies/${id}/comments`, { message: message }).then(({ data }) => {
+      return data
+    })
+  },
+
   addUserComment(id, message) {
     return http.post(`/users/${id}/comments`, { message: message }).then(({ data }) => {
       return data
@@ -107,6 +149,12 @@ export default {
 
   deleteUserComment(userId, commentId) {
     return http.delete(`/users/${userId}/comments/${commentId}`).then(({ data }) => {
+      return data
+    })
+  },
+
+  deleteCompanyComment(companyId, commentId) {
+    return http.delete(`/companies/${companyId}/comments/${commentId}`).then(({ data }) => {
       return data
     })
   },

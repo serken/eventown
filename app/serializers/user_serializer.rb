@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class UserSerializer < ApplicationSerializer
-  attributes :id, :email, :first_name, :last_name,
-             :is_org, :org_name, :is_admin
+  attributes :id, :email, :first_name, :last_name, :is_admin
 
   attribute :favorite_events do
     object.favorite_events
@@ -10,4 +9,5 @@ class UserSerializer < ApplicationSerializer
 
   has_many :comments
   has_many :events
+  has_one :company
 end

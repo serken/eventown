@@ -37,7 +37,14 @@
       <v-btn
         text
         height="48"
-        @click="$router.push(`/orgs`)"
+        @click="$router.push(`/new_company`)"
+      >
+        Хотите стать организатором?
+      </v-btn>
+      <v-btn
+        text
+        height="48"
+        @click="$router.push(`/companies`)"
       >
         Организаторы
       </v-btn>

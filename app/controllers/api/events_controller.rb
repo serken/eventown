@@ -23,7 +23,7 @@ class Api::EventsController < Api::ApiController
   end
 
   def update
-    event = current_user.events.find(params[:id])
+    event = current_user.company.events.find(params[:id])
     event.assign_attributes(event_params)
     if event.save
       render json: event
@@ -45,7 +45,7 @@ class Api::EventsController < Api::ApiController
   end
 
   def create
-    event = current_user.events.new(event_params)
+    event = current_user.company.events.new(event_params)
     if event.save
       render json: event
     else
@@ -54,7 +54,7 @@ class Api::EventsController < Api::ApiController
   end
 
   def destroy
-    current_user.events.find(params[:id]).destroy
+    current_user.company.events.find(params[:id]).destroy
   end
 
   def add_comment

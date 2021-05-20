@@ -13,7 +13,7 @@ class Event < ApplicationRecord
     'opening' => 'Открытие'
   }
 
-  belongs_to :user
+  belongs_to :company
   has_many :favorites, as: :favoritable
   has_many :comments, as: :commentable
 

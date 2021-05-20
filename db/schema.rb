@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_113056) do
+ActiveRecord::Schema.define(version: 2021_05_20_085040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,22 @@ ActiveRecord::Schema.define(version: 2021_04_12_113056) do
     t.string "message"
     t.integer "commentable_id"
     t.string "commentable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "image"
+    t.string "phone"
+    t.string "address"
+    t.integer "user_id"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "instagram"
+    t.boolean "active"
+    t.string "remote_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,6 +56,8 @@ ActiveRecord::Schema.define(version: 2021_04_12_113056) do
     t.date "start_date"
     t.time "start_time"
     t.string "duration"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_events_on_company_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -57,8 +75,6 @@ ActiveRecord::Schema.define(version: 2021_04_12_113056) do
     t.string "password", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
-    t.boolean "is_org", default: false
-    t.string "org_name", default: "", null: false
     t.boolean "is_admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
