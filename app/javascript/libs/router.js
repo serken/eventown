@@ -17,7 +17,11 @@ import EventPage from '../pages/events/event'
 
 import CompaniesListContainer from '../pages/companies/list'
 import CompanyContainer from '../pages/companies/container'
+import CompanyComments from '../pages/companies/comments'
+import AboutCompany from '../pages/companies/about'
 import NewCompany from '../pages/companies/new'
+import CompanyEdit from '../pages/companies/edit'
+import CompanyEvents from '../pages/companies/events'
 
 import AdminUsersList from '../pages/admin/users/list'
 import AdminEventsList from '../pages/admin/events/list'
@@ -53,10 +57,26 @@ const router = new Router({
     {
       path: '/companies',
       component: CompaniesListContainer,
+    },
+    {
+      path: '/companies/:id',
+      component: CompanyContainer,
       children: [
         {
-          path: '/companies/:id',
-          component: CompanyContainer
+          path: '/companies/:id/about',
+          component: AboutCompany
+        },
+        {
+          path: '/companies/:id/comments',
+          component: CompanyComments
+        },
+        {
+          path: '/companies/:id/edit',
+          component: CompanyEdit
+        },
+        {
+          path: '/companies/:id/events',
+          component: CompanyEvents
         }
       ]
     },

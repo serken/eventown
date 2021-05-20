@@ -11,7 +11,7 @@
         dark
       >
         <v-card-text>
-          Проводим индексацию организаций, подождите
+          Проводим индексацию событий, подождите
           <v-progress-linear
             indeterminate
             color="white"
@@ -21,19 +21,28 @@
       </v-card>
     </v-dialog>
     <v-row>
-      <card v-for="company in getCompanies" :company="company" :key="company.id"/>
+      <card v-for="event in company.events" :event="event" :key="event.id"/>
     </v-row>
   </v-col>
 </template>
 
 <script>
-  import companyCard from "../../components/companyCard"
+  import card from "../../components/card"
+  import filters from "../../components/filters"
 
   import { mapActions, mapState, mapGetters } from "vuex"
 
   export default {
     components: {
-      card: companyCard
+      card: card,
+      filters: filters
+    },
+
+    props: {
+      company: {
+        type: Object,
+        default: () => {}
+      }
     },
 
     data: function() {
@@ -43,21 +52,13 @@
     },
 
     mounted: function() {
-      this.fetchCompanies()
     },
 
     methods: {
-      fetchCompanies: function() {
-        this.$api.fetchCompanies().then((data) => {
-          this.setCompanies(data.companies)
-        })
-      },
-
-      ...mapActions("companies", ["setCompanies"])
     },
 
     computed: {
-      ...mapGetters("companies", ["getCompanies"])
+      ...mapGetters("user", ["currentUser"])
     },
 
     watch: {
