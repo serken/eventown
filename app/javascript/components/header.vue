@@ -35,7 +35,7 @@
       ></v-text-field>
 
       <v-btn
-        v-if="!currentUser.has_company"
+        v-if="currentUser && !currentUser.has_company"
         text
         height="48"
         @click="$router.push(`/new_company`)"
