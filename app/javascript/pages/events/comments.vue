@@ -1,10 +1,12 @@
 <template>
   <div>
-    <v-textarea v-model="message" placeholder="Комментарий...">
-    </v-textarea>
-    <v-btn @click="addComment">
-      Добавить комментарий
-    </v-btn>
+    <v-card>
+      <v-textarea class="ma-4" v-model="message" placeholder="Комментарий...">
+      </v-textarea>
+      <v-btn class="ma-4" @click="addComment">
+        Добавить комментарий
+      </v-btn>
+    </v-card>
     <template v-for="comment in event.comments">
       <comment :comment="comment" @delete-comment="deleteComment"/>
     </template>

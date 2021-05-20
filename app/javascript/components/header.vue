@@ -29,13 +29,22 @@
 
       <v-text-field
         hide-details
-        prepend-icon="mdi-magnify"
+        append-icon="mdi-magnify"
         single-line
+        max-width="100px"
       ></v-text-field>
 
       <v-btn
         text
         height="48"
+        @click="$router.push(`/orgs`)"
+      >
+        Организаторы
+      </v-btn>
+      <v-btn
+        text
+        height="48"
+        @click="$router.push(`/`)"
       >
         Черноморск
       </v-btn>
@@ -79,7 +88,7 @@
     <v-navigation-drawer
       v-model="showRightPanel"
       app
-      absolute
+      fixed
       temporary
       right
     >

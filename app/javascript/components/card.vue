@@ -103,11 +103,11 @@
       },
 
       isFavorite: function() {
-        return this.currentUser.favorite_events.map(i => i.favoritable_id).includes(this.event.id)
+        return this.currentUser && this.currentUser.favorite_events && this.currentUser.favorite_events.map(i => i.favoritable_id).includes(this.event.id)
       },
 
       isMyEvent: function() {
-        return this.currentUser && this.currentUser.events.map(i => i.id).includes(this.event.id)
+        return this.currentUser && this.currentUser.events && this.currentUser.events.map(i => i.id).includes(this.event.id)
       },
 
       ...mapGetters("user", ["currentUser"])

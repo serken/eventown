@@ -1,7 +1,39 @@
 <template>
   <div>
     <div>
-      HERE EVENT BASE
+      <v-row>
+        <v-col left>
+          <v-img
+            :src="event.pic"
+            height="250"
+            contain
+          >
+
+          </v-img>
+        </v-col>
+        <v-col>
+          <v-list>
+            <v-list-item>
+              Название: {{ event.title }}
+            </v-list-item>
+            <v-list-item>
+              Тип: {{ event.type }}
+            </v-list-item>
+            <v-list-item>
+              Ссылка на событие: {{ event.remote_url }}
+            </v-list-item>
+            <v-list-item>
+              Где: {{ event.location }}
+            </v-list-item>
+            <v-list-item>
+              Когда: {{ event.start_time }} {{ formatedDate }}
+            </v-list-item>
+            <v-list-item>
+              Телефон: {{ event.phone_number }}
+            </v-list-item>
+          </v-list>
+        </v-col>
+      </v-row>
     </div>
     <v-tabs>
       <v-tab :to="`/events/${event.id}/about`">О Событии</v-tab>
@@ -37,6 +69,10 @@
     computed: {
       isMyEvent: function() {
         return this.currentUser && this.currentUser.events.map(i => i.id).includes(this.event.id)
+      },
+
+      formatedDate: function() {
+        return this.$moment(this.event.start_date).format("dddd, D MMMM YYYY.")
       },
 
       ...mapGetters("user", ["currentUser"])

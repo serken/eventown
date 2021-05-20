@@ -15,6 +15,9 @@ import EventContainer from '../pages/events/container'
 import EventComments from '../pages/events/comments'
 import EventPage from '../pages/events/event'
 
+import OrgsListContainer from '../pages/orgs/list'
+import OrgsContainer from '../pages/orgs/container'
+
 import AdminUsersList from '../pages/admin/users/list'
 import AdminEventsList from '../pages/admin/events/list'
 import Admin from '../pages/admin/index'
@@ -40,6 +43,17 @@ const router = new Router({
     {
       path: '/sign_up',
       component: Register
+    },
+
+    {
+      path: '/orgs',
+      component: OrgsListContainer,
+      children: [
+        {
+          path: '/orgs/:id',
+          component: OrgsContainer
+        }
+      ]
     },
     {
       path: '/profile',
