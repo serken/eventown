@@ -20,10 +20,6 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    Ближайшие события:
-    <slider :objects="nearEvents">
-
-    </slider>
     <filters @update-filters="updateFilters" @update-date-filter="updateDateFilter" />
     <v-pagination v-model="page" :total-visible="7" :length="total" :per-page="perPage" @input="pageChanged" />
     <v-row>
@@ -36,16 +32,13 @@
 <script>
   import card from "../../components/card"
   import filters from "../../components/filters"
-  import slider from "../../components/slider"
 
   import { mapActions, mapState, mapGetters } from "vuex"
-  import { EVENT_TYPES } from '../../constants'
 
   export default {
     components: {
       card: card,
-      filters: filters,
-      slider: slider
+      filters: filters
     },
 
     data: function() {
@@ -55,21 +48,12 @@
         total: null,
         dialog: false,
         filters: [],
-        date_filter: [],
-        nearEvents: []
+        date_filter: []
       }
     },
 
     mounted: function() {
       this.fetchFiltereEvents()
-      this.nearestEvents()
-    },
-
-    computed: {
-      eventTypes: function() {
-        return EVENT_TYPES
-      },
-      ...mapGetters("events", ["getEvents"])
     },
 
     methods: {
@@ -79,12 +63,6 @@
           this.total = Math.ceil(data.meta.total / this.perPage)
           this.setEvents(data.events)
           this.dialog = false
-        })
-      },
-
-      nearestEvents: function() {
-        this.$api.nearestEvents().then((data) => {
-          this.nearEvents = data
         })
       },
 
@@ -104,6 +82,10 @@
 
       ...mapActions("events", ["setEvents"])
     },
+
+    computed: {
+      ...mapGetters("events", ["getEvents"])
+    }
   }
 </script>
 

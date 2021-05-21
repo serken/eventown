@@ -21,6 +21,8 @@ class Event < ApplicationRecord
 
   scope :with_date_range, -> (start_date, end_date) { where(start_date: start_date..end_date) }
 
+  scope :nearest, -> { order(start_date: :desc).limit(20) }
+
   mount_uploader :image, ImageUploader
 
   validates :cost, :duration, numericality: true

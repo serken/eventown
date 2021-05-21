@@ -7,6 +7,10 @@ class UserSerializer < ApplicationSerializer
     object.favorite_events
   end
 
+  attribute :favorite_companies do
+    object.favorite_companies
+  end
+
   attribute :has_company do
     object.company.present?
   end

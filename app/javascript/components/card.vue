@@ -6,7 +6,6 @@
       :class="{ 'on-hover': hover }"
       max-width="250"
       shaped
-      @click="$router.push(`/events/${event.id}/about`)"
     >
       <template slot="progress">
         <v-progress-linear
@@ -47,6 +46,13 @@
         >
           Неактивен
         </v-chip>
+        <v-btn
+          @mousedown.stop
+          @click="$router.push(`/events/${event.id}/about`)"
+        >
+          Подробнее
+        </v-btn>
+
         <v-spacer></v-spacer>
         <v-btn
           v-if="isMyEvent"

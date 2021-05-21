@@ -22,6 +22,10 @@ class Api::EventsController < Api::ApiController
     render json: Event.find(params[:id])
   end
 
+  def near_events
+    render json: Event.nearest
+  end
+
   def update
     event = current_user.company.events.find(params[:id])
     event.assign_attributes(event_params)

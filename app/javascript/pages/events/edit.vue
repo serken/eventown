@@ -189,6 +189,7 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex"
+import { EVENT_TYPES } from '../../constants'
 export default {
 
   data: function() {
@@ -202,12 +203,7 @@ export default {
 
   computed: {
     eventTypes: function() {
-      return [
-        { text: "Вечеринка", value: 'party'},
-        { text: "Мастер Класс", value: 'master_class'},
-        { text: "Выставка", value: 'performance'},
-        { text: "Открытие", value: 'opening'}
-      ]
+      return EVENT_TYPES
     }
   },
 

@@ -30,10 +30,10 @@
       </v-row>
     </div>
     <v-tabs>
-      <v-tab :to="`/companies/${company.id}/about`">О Событии</v-tab>
+      <v-tab :to="`/companies/${company.id}/about`">Об Организации</v-tab>
       <v-tab :to="`/companies/${company.id}/events`">События</v-tab>
       <v-tab :to="`/companies/${company.id}/comments`">Комментарии</v-tab>
-      <v-tab v-if="isMyCompany" :to="`/companies/${company.id}/edit`">Обновить Организацию</v-tab>
+      <v-tab v-if="isMyCompany" :to="`/companies/${company.id}/edit`">Редактировать Организацию</v-tab>
     </v-tabs>
     <router-view :company="company" @update-company="updateCompany"/>
   </div>

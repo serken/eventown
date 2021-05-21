@@ -181,6 +181,8 @@
 </template>
 
 <script>
+import { EVENT_TYPES } from '../../../constants'
+
 export default {
   data: function() {
     return {
@@ -219,12 +221,7 @@ export default {
     },
 
     eventTypes: function() {
-      return [
-        { text: "Вечеринка", value: 'party'},
-        { text: "Мастер Класс", value: 'master_class'},
-        { text: "Выставка", value: 'performance'},
-        { text: "Открытие", value: 'opening'}
-      ]
+      return EVENT_TYPES
     }
   },
 

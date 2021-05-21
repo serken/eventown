@@ -13,6 +13,10 @@ class User < ApplicationRecord
     self.favorites.where(favoritable_type: 'Event')
   end
 
+  def favorite_companies
+    self.favorites.where(favoritable_type: 'Company')
+  end
+
   def commented_events
     self.my_comments.where(commentable_type: 'Event')
   end

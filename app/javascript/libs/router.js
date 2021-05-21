@@ -14,6 +14,7 @@ import EventEdit from '../pages/events/edit'
 import EventContainer from '../pages/events/container'
 import EventComments from '../pages/events/comments'
 import EventPage from '../pages/events/event'
+import EventsSearch from '../pages/events/search'
 
 import CompaniesListContainer from '../pages/companies/list'
 import CompanyContainer from '../pages/companies/container'
@@ -97,6 +98,11 @@ const router = new Router({
           component: Favorites
         }
       ]
+    },
+
+    {
+      path: '/events',
+      component: EventsSearch
     },
     {
       path: '/events/:id',

@@ -39,6 +39,12 @@ export default {
     })
   },
 
+  nearestEvents() {
+    return http.get('/near_events').then(({ data }) => {
+      return data
+    })
+  },
+
   fetchUsers(params = {}) {
     return http.get('/users', params).then(({ data }) => {
       return data

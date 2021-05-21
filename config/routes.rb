@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get 'restore_session', to: 'session#restore'
     post 'restore_password', to: 'session#restore_password'
     post 'update_password', to: 'session#update_password'
+    get 'near_events', to: 'events#near_events'
 
     resources :events do
       member do
