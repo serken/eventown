@@ -1,31 +1,53 @@
 <template>
-  <div class="event-card">
-    <div class="event-img-block">
-      <img
-        contain
-        class="event-img"
-        height="460"
-        width="320"
-        :src="`${image}`"
-      >
-      </img>
-    </div>
-    <div class="event-content">
-      <div>
+  <v-hover v-slot="{ hover }">
+    <v-card
+      class="mx-auto my-6 event-card"
+      :elevation="hover ? 16 : 2"
+      :class="{ 'on-hover': hover }"
+      max-width="250"
+      shaped
+    >
+      <template slot="progress">
+        <v-progress-linear
+          color="deep-purple"
+          height="10"
+          indeterminate
+        ></v-progress-linear>
+      </template>
 
-      </div>
-      <div class="title">
-        {{ event.title }}
-      </div>
-      <div>
-        {{ event.start_time }} {{ formatedDate }}
-      </div>
-      <div>
+      <v-img
+        height="250"
+        contain
+        :src="`${event.pic}`"
+        :lazy-src="'https://mizez.com/custom/mizez/img/general/no-image-available.png'"
+      >
+      </v-img>
+
+      <v-card-text>
+        <div>{{event.type}}</div>
+        <p class="title text--primary cropped">
+          {{event.title.replace(/(.{15})..+/, "$1…")}}
+        </p>
+        <p>Цена: $ {{event.cost}}</p>
+        <div class="text--primary">
+
+        </div>
+        <span class="text-h5">
+          {{event.start_time}}
+        </span>
+        <br>
+        {{formatedDate}}
+      </v-card-text>
+      <v-divider></v-divider>
+      <v-card-actions>
+        <v-chip
+          v-if="!event.active"
+          class="ma-2"
+        >
+          Неактивен
+        </v-chip>
         <v-btn
           @mousedown.stop
-          outlined
-          rounded
-          color="white"
           @click="$router.push(`/events/${event.id}/about`)"
         >
           Подробнее
@@ -34,11 +56,7 @@
         <v-spacer></v-spacer>
         <v-btn
           v-if="isMyEvent"
-          outline
           icon
-          outlined
-          rounded
-          color="white"
           @click.stop
           :to="`/events/${event.id}/edit`"
           @mousedown.stop
@@ -49,9 +67,6 @@
         </v-btn>
         <v-btn
           icon
-          outlined
-          rounded
-          color="white"
           v-if="currentUser"
           @click.stop="makeFavorite"
           @mousedown.stop
@@ -61,9 +76,6 @@
 
         <v-btn
           icon
-          outlined
-          rounded
-          color="white"
           @click.stop
           @mousedown.stop
         >
@@ -71,18 +83,13 @@
             mdi-share-outline
           </v-icon>
         </v-btn>
-      </div>
-      <div>
-
-      </div>
-    </div>
-  </div>
+      </v-card-actions>
+    </v-card>
+  </v-hover>
 </template>
-
 <script>
   import { mapActions, mapState, mapGetters } from "vuex"
 
-  const IMG = 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
   export default {
     props: {
       event: {
@@ -109,10 +116,6 @@
         return this.currentUser && this.currentUser.events && this.currentUser.events.map(i => i.id).includes(this.event.id)
       },
 
-      image: function() {
-        return this.event.pic ? this.event.pic : IMG
-      },
-
       ...mapGetters("user", ["currentUser"])
     },
 
@@ -135,58 +138,6 @@
   >.v-card__text
     color: #000
 .event-card
+  flex: 1 0 21%
   margin: 5px
-  width: 320px
-  height: 460px
-  position: relative
-  border-radius: 10px
-  overflow: hidden
-  &:hover
-    .event-img
-      transform: scale(1.1)
-  .event-content
-    padding: 40px 26px
-    flex-wrap: wrap
-    justify-content: center !important
-    align-items: center !important
-    display: flex
-    position: absolute
-    color: #dddddd !important
-    bottom: 0
-    left: 0
-    width: 100%
-    z-index: 2
-    text-align: center
-    div
-      width: 100%
-      margin-top: 10px
-
-      &.title
-        font-size: 28px !important
-
-
-  .event-img-block
-    position: absolute
-    top: 0
-    bottom: 0
-    right: 0
-    left: 0
-    transition: all 0.6s ease
-    overflow: hidden
-
-    .event-img
-      width: 100%
-      height: 100%
-      object-fit: cover
-      transition: all 0.6s ease
-
-    &::after
-      content: ''
-      position: absolute
-      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.91) 58%)
-      bottom: 0
-      left: 0
-      right: 0
-      top: 0
-      opacity: 0.7
 </style>

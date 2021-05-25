@@ -27,7 +27,9 @@
     <filters @update-filters="updateFilters" @update-date-filter="updateDateFilter" />
     <v-pagination v-model="page" :total-visible="7" :length="total" :per-page="perPage" @input="pageChanged" />
     <v-row>
-      <card v-for="event in getEvents" :event="event" :key="event.id"/>
+      <v-col v-for="event in getEvents" :key="event.id">
+        <card :event="event"/>
+      </v-col>
     </v-row>
     <v-pagination v-model="page" :total-visible="7" :length="total" :per-page="perPage" @input="pageChanged" />
   </div>
