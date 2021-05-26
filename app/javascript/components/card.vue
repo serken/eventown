@@ -5,7 +5,7 @@
         contain
         class="event-img"
         height="460"
-        width="320"
+        width="353"
         :src="`${image}`"
       >
       </img>
@@ -136,7 +136,7 @@
     color: #000
 .event-card
   margin: 5px
-  width: 320px
+  width: 353px
   height: 460px
   position: relative
   border-radius: 10px
