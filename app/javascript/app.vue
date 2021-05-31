@@ -73,15 +73,14 @@
   .notifications
     z-index: 9999
   .container
-    background-color: rgba(255,255,255,0.8)
+    background-color: rgba(255, 255, 255, 0.8)
   .background-img
-    background-image: linear-gradient(rgba(0,33,0,.1), rgba(255,0,0,.1)), url("images/back3.jpg")
-    background-repeat: repeat
-    background-size: 17%
-    position: absolute
+    background-image: url("images/back4.jpg")
+    background-size: cover
+    position: fixed
     left: 0
     top: 0
     width: 100%
     height: 100%
-    opacity: 0.4
+    opacity: 0.6
 </style>
