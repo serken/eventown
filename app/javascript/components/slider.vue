@@ -1,5 +1,5 @@
 <template>
-  <carousel :scrollPerPage="true" :autoplay="true" :perPage="4" :navigationEnabled="true">
+  <carousel :scrollPerPage="true" :autoplay="true" :perPage="3" :navigationEnabled="true">
     <slide v-for="object in objects" :key="object.id">
       <card :event="object"/>
     </slide>

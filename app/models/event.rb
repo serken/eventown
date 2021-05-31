@@ -23,6 +23,11 @@ class Event < ApplicationRecord
 
   scope :nearest, -> { order(start_date: :desc).limit(20) }
 
+  scope :by_search, -> (text) {
+    cond = "%#{text}%"
+    where("title ilike ? or description ilike ?", cond, cond)
+  }
+
   mount_uploader :image, ImageUploader
 
   validates :cost, :duration, numericality: true

@@ -24,7 +24,16 @@
     <slider :objects="nearEvents">
 
     </slider>
-    <filters @update-filters="updateFilters" @update-date-filter="updateDateFilter" />
+    <filters ref="filters" @update-filters="updateFilters" @update-date-filter="updateDateFilter" />
+    <v-chip
+      v-model="!!$route.query.search"
+      v-if="$route.query.search"
+      filter
+      outlined
+      @click="removeSearch"
+    >
+      {{ $route.query.search }}
+    </v-chip>
     <v-pagination v-model="page" :total-visible="7" :length="total" :per-page="perPage" @input="pageChanged" />
     <v-row>
       <v-col v-for="event in getEvents" :key="event.id">
@@ -50,6 +59,13 @@
       slider: slider
     },
 
+    props: {
+      params: {
+        type: Object,
+        default: () => {}
+      }
+    },
+
     data: function() {
       return {
         page: 1,
@@ -63,8 +79,30 @@
     },
 
     mounted: function() {
-      this.fetchFiltereEvents()
+      this.fetchFilteredEvents()
       this.nearestEvents()
+    },
+
+    watch: {
+      filters: function(oldV, newV) {
+        const el = this.$refs.filters;
+
+        if (el) {
+          // Use el.scrollIntoView() to instantly scroll to the element
+          el.$el.scrollIntoView(!0);
+          this.fetchFilteredEvents()
+        }
+      },
+
+      '$route.query.search': function(oldV, newV) {
+        const el = this.$refs.filters;
+
+        if (el) {
+          // Use el.scrollIntoView() to instantly scroll to the element
+          el.$el.scrollIntoView(!0);
+          this.fetchFilteredEvents()
+        }
+      }
     },
 
     computed: {
@@ -75,13 +113,23 @@
     },
 
     methods: {
-      fetchFiltereEvents: function() {
+      fetchFilteredEvents: function() {
         this.dialog = true
-        this.$api.fetchEvents({ params: { page: this.page, per_page: this.perPage, filters: this.filters, date_filter: this.date_filter }}).then((data) => {
+        const params = {
+          page: this.page, per_page: this.perPage,
+          filters: this.filters, date_filter: this.date_filter,
+          search: this.$route.query.search
+        }
+
+        this.$api.fetchEvents({ params: params }).then((data) => {
           this.total = Math.ceil(data.meta.total / this.perPage)
           this.setEvents(data.events)
           this.dialog = false
         })
+      },
+
+      removeSearch: function() {
+        this.$router.push({ path: '/', query: {}}).catch(() => {})
       },
 
       nearestEvents: function() {
@@ -91,17 +139,17 @@
       },
 
       pageChanged: function() {
-        this.fetchFiltereEvents()
+        this.fetchFilteredEvents()
       },
 
       updateFilters: function(filters) {
         this.filters = filters
-        this.fetchFiltereEvents()
+        this.fetchFilteredEvents()
       },
 
       updateDateFilter: function(dateFilter) {
         this.date_filter = dateFilter
-        this.fetchFiltereEvents()
+        this.fetchFilteredEvents()
       },
 
       ...mapActions("events", ["setEvents"])

@@ -27,10 +27,12 @@
       <v-spacer></v-spacer>
 
       <v-text-field
+        v-model="search"
         hide-details
         append-icon="mdi-magnify"
         single-line
         max-width="100px"
+        @click:append="setSearch"
       ></v-text-field>
 
       <v-btn
@@ -129,7 +131,8 @@ export default {
       signUpDialog: null,
       showLeftPanel: false,
       showRightPanel: false,
-      forgetDialog: null
+      forgetDialog: null,
+      search: ''
     }
   },
 
@@ -152,6 +155,10 @@ export default {
   methods: {
     toggleLeft: function() {
       this.showLeftPanel = !this.showLeftPanel
+    },
+
+    setSearch: function() {
+      this.$router.push({ path: '/', query: { search: this.search }}).catch(() => {})
     },
 
     toggleRight: function() {

@@ -15,6 +15,11 @@ class Api::EventsController < Api::ApiController
     if params[:filters].present?
       events = events.where(event_type: params[:filters])
     end
+
+    if params[:search].present?
+      events = events.by_search(params[:search])
+    end
+
     render json: events, meta: { total: events.count }, adapter: :json
   end
 
