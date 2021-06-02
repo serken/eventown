@@ -89,7 +89,7 @@
           class="mr-4"
           @click="createEvent"
         >
-          Создать Событие
+          Сохранить
         </v-btn>
       </v-card-actions>
     </v-card>
