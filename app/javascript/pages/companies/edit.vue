@@ -1,7 +1,7 @@
 <template>
   <v-card class="mt-4">
     <v-card-title>
-      <span class="headline">Новая организация</span>
+      <span class="headline">Редактирование</span>
     </v-card-title>
     <v-card-text>
       <v-container>
@@ -9,7 +9,7 @@
           <v-text-field
             v-model="company.name"
             :error-messages="errors.name"
-            label="Название"
+            label="Имя организации"
             required
           ></v-text-field>
         </v-row>
@@ -18,7 +18,7 @@
           <v-textarea
             v-model="company.description"
             :error-messages="errors.description"
-            label="Описание"
+            label="Информация об организации"
             required
             clearable
           ></v-textarea>
@@ -81,7 +81,7 @@
         class="mr-4"
         @click="createEvent"
       >
-        Создать Событие
+        Сохранить
       </v-btn>
     </v-card-actions>
   </v-card>
