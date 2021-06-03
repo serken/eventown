@@ -14,7 +14,7 @@
         <v-col>
           <v-list>
             <v-list-item>
-              Название: {{ company.name }}
+              Имя организации: {{ company.name }}
             </v-list-item>
             <v-list-item>
               Ссылка на организацию: {{ company.remote_url }}
