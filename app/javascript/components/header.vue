@@ -41,7 +41,7 @@
         height="48"
         @click="$router.push(`/new_company`)"
       >
-        Хотите стать организатором?
+        Вы организатор?
       </v-btn>
 
       <v-btn
