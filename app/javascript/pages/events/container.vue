@@ -17,16 +17,16 @@
                {{ event.title }}
             </v-list-item>
             <v-list-item>
-              Организатор: {{ event. }}
+              Организатор: 
             </v-list-item>
             <v-list-item>
               Когда: {{ event.start_time }} {{ formatedDate }}
             </v-list-item>
             <v-list-item>
-              Стоимость: {{ event. }}
+              Стоимость: {{ event.cost }}
             </v-list-item>
              <v-list-item>
-              Длительность: {{ event. }}
+              Длительность: {{ event.duration }}
             </v-list-item>
             <v-list-item>
               Ссылка на событие: {{ event.remote_url }}
