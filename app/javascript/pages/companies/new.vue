@@ -9,7 +9,7 @@
             <v-text-field
               v-model="name"
               :error-messages="errors.name"
-              label="Название"
+              label="Имя организации"
               required
             ></v-text-field>
           </v-row>
@@ -18,7 +18,7 @@
             <v-textarea
               v-model="description"
               :error-messages="errors.description"
-              label="Описание"
+              label="Информация об организации"
               required
               clearable
             ></v-textarea>
@@ -28,7 +28,7 @@
             <v-file-input
               v-model="image"
               :error-messages="errors.image"
-              label="Изображение"
+              label="Логотип"
             ></v-file-input>
           </v-row>
 
