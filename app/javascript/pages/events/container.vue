@@ -14,19 +14,22 @@
         <v-col>
           <v-list>
             <v-list-item>
-              Название: {{ event.title }}
+               {{ event.title }}
             </v-list-item>
             <v-list-item>
-              Тип: {{ event.type }}
-            </v-list-item>
-            <v-list-item>
-              Ссылка на событие: {{ event.remote_url }}
-            </v-list-item>
-            <v-list-item>
-              Где: {{ event.location }}
+              Организатор: 
             </v-list-item>
             <v-list-item>
               Когда: {{ event.start_time }} {{ formatedDate }}
+            </v-list-item>
+            <v-list-item>
+              Стоимость: {{ event.cost }}
+            </v-list-item>
+             <v-list-item>
+              Длительность: {{ event.duration }}
+            </v-list-item>
+            <v-list-item>
+              Ссылка на событие: {{ event.remote_url }}
             </v-list-item>
             <v-list-item>
               Телефон: {{ event.phone_number }}
