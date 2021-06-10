@@ -8,70 +8,105 @@
         >
           <v-form
             v-model="valid"
-            @submit.prevent="reg"
+            @submit.prevent="update"
+            class="update-form"
           >
             <v-row>
-              <validation-provider
-                v-slot="{ errors }"
-                vid="password"
-                name="password"
-                rules="required|min:8"
-              >
-                <v-text-field
-                  v-model="password"
-                  :error-messages="errors"
-                  label="Введите пароль"
-                  type="password"
-                  required
-                ></v-text-field>
-              </validation-provider>
+              <v-col>
+                <v-row>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    vid="password"
+                    name="password"
+                    rules="required|min:8"
+                  >
+                    <v-text-field
+                      v-model="password"
+                      :error-messages="errors"
+                      label="Пароль"
+                      type="password"
+                      required
+                    ></v-text-field>
+                  </validation-provider>
+                </v-row>
+
+                <v-row>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="confirm_password"
+                    rules="required|confirmed:password"
+                  >
+                    <v-text-field
+                      v-model="confirmPassword"
+                      :error-messages="errors"
+                      label="Подтверждение пароля"
+                      name="confirmPassword"
+                      type="password"
+                      required
+                    ></v-text-field>
+                  </validation-provider>
+                </v-row>
+
+                <v-row>
+                  <v-text-field
+                    v-model="first_name"
+                    label="Имя"
+                  ></v-text-field>
+
+                </v-row>
+
+                <v-row>
+                  <v-text-field
+                    v-model="last_name"
+                    label="Фамилия"
+                  ></v-text-field>
+
+                </v-row>
+              </v-col>
             </v-row>
 
             <v-row>
-              <validation-provider
-                v-slot="{ errors }"
-                name="confirm_password"
-                rules="required|confirmed:password"
-              >
-                <v-text-field
-                  v-model="confirmPassword"
-                  :error-messages="errors"
-                  label="Подтвердите пароль"
-                  name="confirmPassword"
-                  type="password"
-                  required
-                ></v-text-field>
-              </validation-provider>
-            </v-row>
-
-            <v-row>
-              <v-text-field
-                v-model="first_name"
-                label="Введите свое имя"
-              ></v-text-field>
-
-            </v-row>
-
-            <v-row>
-              <v-text-field
-                v-model="last_name"
-                label="Введите свою фамилию"
-              ></v-text-field>
-
-            </v-row>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                  :disabled="!valid"
-                  color="success"
-                  class="mr-4"
-                  type="submit"
+              <v-col>
+                <img
+                  contain
+                  class="event-img"
+                  height="200"
+                  width="200"
+                  :src="`${userPic}`"
                 >
-                  Обновить
-                </v-btn>
-            </v-card-actions>
+                </img>
+              </v-col>
+              <v-col>
+                <v-row>
+                  <v-file-input
+                    v-model="image"
+                    label="Изображение профиля"
+                  ></v-file-input>
+                </v-row>
+                <v-row>
+                  <v-btn
+                    color="success"
+                    class="mr-4"
+                    @click="update_image"
+                  >
+                    Обновить Изображение
+                  </v-btn>
+                </v-row>
+              </v-col>
+            </v-row>
+
           </v-form>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                :disabled="!valid"
+                color="success"
+                class="mr-4"
+                type="submit"
+              >
+                Обновить
+              </v-btn>
+          </v-card-actions>
         </validation-observer>
       </v-container>
     </v-card-text>
@@ -82,6 +117,7 @@
 import { mapActions, mapState, mapGetters } from "vuex"
 import { required, confirmed, email, min } from 'vee-validate/dist/rules'
 import { extend, setInteractionMode } from 'vee-validate'
+const IMG = 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
 
 setInteractionMode('eager')
 
@@ -107,20 +143,14 @@ setInteractionMode('eager')
 
 
 export default {
-
-  props: {
-    showDialog: {
-      type: Boolean,
-      default: false
-    }
-  },
-
   data: function() {
     return {
       valid: true,
       email: '',
       password: '',
       confirmPassword: '',
+      image: '',
+      pic: '',
       passwordRules: [
         (value) => !!value || 'Пожалуйста, заполните пароль.',
         (value) => (value && value.length >= 8 ) || 'минимум 8 символов'
@@ -135,7 +165,6 @@ export default {
       email: '',
       first_name: '',
       last_name: '',
-      dialog: false,
       errors: {},
       emailRules: [
         v => !!v || 'Пожалуйста, заполните электронную почту.',
@@ -144,14 +173,19 @@ export default {
     }
   },
 
-  watch: {
-    showDialog: function(val) {
-      this.dialog = val
-    }
+  computed: {
+    userPic: function() {
+      return this.pic.length > 0 ? this.pic : IMG
+    },
+
+    ...mapGetters("user", ["currentUser"])
   },
 
-  computed: {
-    ...mapGetters("user", ["currentUser"])
+  mounted: function() {
+    this.email = this.currentUser.email
+    this.first_name = this.currentUser.first_name
+    this.last_name = this.currentUser.last_name
+    this.pic = this.currentUser.pic
   },
 
   methods: {
@@ -163,12 +197,29 @@ export default {
         first_name: this.user.first_name,
         last_name: this.user.last_name
       }
-      this.$api.register(params).then((data) => {
-        this.$emit('clear-sign-up')
-        this.dialog = false
-        this.$eventBus.$emit('show-flash', { type: 'info', text: 'Регистрация прошла успешно. Благодарочка' })
+
+      this.$api.updateUser(this.currentUser.id, params).then((data) => {
+        this.$eventBus.$emit('show-flash', { type: 'info', text: 'Профиль успешно обновлен. Красава' })
         this.setUser(data)
         this.$router.push('/').catch(() => {})
+      }).catch((error) => {
+        this.errors = error.errors
+        this.$eventBus.$emit('show-flash', { type: 'error', text: error.full_errors })
+      })
+    },
+
+    update_image: function() {
+      const params = {
+        image: this.image
+      }
+      let formData = new FormData()
+      Object.entries(params).forEach(
+        ([key, value]) => formData.append(key, value)
+      )
+
+      this.$api.updateUser(this.currentUser.id, formData).then((data) => {
+        this.$eventBus.$emit('show-flash', { type: 'info', text: 'Изображение профиля успешно обновлено. Красава' })
+        this.setUser(data)
       }).catch((error) => {
         this.errors = error.errors
         this.$eventBus.$emit('show-flash', { type: 'error', text: error.full_errors })
@@ -179,3 +230,13 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .update-form
+    flex-direction: row
+    display: flex
+    .row
+      width: 50%
+      span
+        width: 100%
+</style>

@@ -168,6 +168,7 @@ export default {
     signOutUser: function() {
       this.$eventBus.$emit('show-flash', { type: 'info', text: 'Пока пока' })
       this.signOut()
+      this.$router.push({ path: '/' }).catch(() => {})
     },
 
     signIn: function() {

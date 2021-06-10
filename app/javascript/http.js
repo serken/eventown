@@ -45,7 +45,7 @@ http.interceptors.response.use(function (response) {
     sessionStorage.csrf = error.response.config.headers['X-CSRF-Token']
   }
 
-  if (error.response.status >= 400) {
+  if (error.response.status == 401) {
     // TODO: use generic method for client session reset
     store.dispatch('user/setUser', null)
   }

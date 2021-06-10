@@ -15,6 +15,7 @@ class Api::UsersController < Api::ApiController
     current_user.assign_attributes(user_params)
 
     if current_user.save
+      current_user.reload
       render json: current_user
     else
       render json: { errors: 'error' }, status: 422
@@ -57,6 +58,6 @@ class Api::UsersController < Api::ApiController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :login, :first_name, :last_name)
+    params.permit(:email, :password, :login, :first_name, :last_name, :image)
   end
 end
