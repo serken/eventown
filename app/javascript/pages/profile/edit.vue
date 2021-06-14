@@ -13,6 +13,21 @@
           >
             <v-row>
               <v-col>
+              <v-row>
+                  <v-text-field
+                    v-model="first_name"
+                    label="Имя"
+                  ></v-text-field>
+
+                </v-row>
+
+                <v-row>
+                  <v-text-field
+                    v-model="last_name"
+                    label="Фамилия"
+                  ></v-text-field>
+
+                </v-row>
                 <v-row>
                   <validation-provider
                     v-slot="{ errors }"
@@ -47,21 +62,7 @@
                   </validation-provider>
                 </v-row>
 
-                <v-row>
-                  <v-text-field
-                    v-model="first_name"
-                    label="Имя"
-                  ></v-text-field>
-
-                </v-row>
-
-                <v-row>
-                  <v-text-field
-                    v-model="last_name"
-                    label="Фамилия"
-                  ></v-text-field>
-
-                </v-row>
+               
               </v-col>
             </v-row>
 
