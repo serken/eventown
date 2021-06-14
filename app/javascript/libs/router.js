@@ -96,6 +96,10 @@ const router = new Router({
         {
           path: '/profile/favorites',
           component: Favorites
+        },
+        {
+          path: '/profile/edit_company',
+          component: CompanyEdit
         }
       ]
     },

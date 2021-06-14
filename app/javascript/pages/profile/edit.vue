@@ -89,13 +89,12 @@
                     class="mr-4"
                     @click="update_image"
                   >
-                    Обновить Изображение
+                    Сохранить
                   </v-btn>
                 </v-row>
               </v-col>
             </v-row>
 
-          </v-form>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
@@ -103,10 +102,12 @@
                 color="success"
                 class="mr-4"
                 type="submit"
+                @click="update"
               >
                 Обновить
               </v-btn>
           </v-card-actions>
+          </v-form>
         </validation-observer>
       </v-container>
     </v-card-text>
@@ -193,9 +194,9 @@ export default {
       this.$refs.observer.validate()
 
       const params = {
-        password: this.user.password,
-        first_name: this.user.first_name,
-        last_name: this.user.last_name
+        password: this.password,
+        first_name: this.first_name,
+        last_name: this.last_name
       }
 
       this.$api.updateUser(this.currentUser.id, params).then((data) => {
@@ -220,6 +221,7 @@ export default {
       this.$api.updateUser(this.currentUser.id, formData).then((data) => {
         this.$eventBus.$emit('show-flash', { type: 'info', text: 'Изображение профиля успешно обновлено. Красава' })
         this.setUser(data)
+        this.pic = data.pic
       }).catch((error) => {
         this.errors = error.errors
         this.$eventBus.$emit('show-flash', { type: 'error', text: error.full_errors })
@@ -235,6 +237,7 @@ export default {
   .update-form
     flex-direction: row
     display: flex
+    flex-wrap: wrap
     .row
       width: 50%
       span

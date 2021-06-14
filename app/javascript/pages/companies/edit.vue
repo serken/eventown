@@ -99,6 +99,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters("user", ["currentUser"])
   },
 
   mounted: function() {
@@ -107,7 +108,7 @@ export default {
 
   methods: {
     fetchCompany: function() {
-      this.$api.fetchCompany(this.$router.currentRoute.params.id).then((company) => {
+      this.$api.fetchCompany(this.currentUser.company.id).then((company) => {
         this.company = company
       })
     },
