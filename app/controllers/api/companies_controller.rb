@@ -19,6 +19,7 @@ class Api::CompaniesController < Api::ApiController
     company = current_user.company
     company.assign_attributes(company_params)
     if company.save
+      company.reload
       render json: company
     else
       render json: { errors: 'error' }, status: 422
